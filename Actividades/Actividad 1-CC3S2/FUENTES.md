@@ -1,5 +1,6 @@
 ### Referencias utilizadas:
 
+-   Fenton, S. (2024, 28 de noviembre). Canary deployments: Pros, cons, and 5 critical best practices [Blog post]. Octopus Deploy. Recuperado de https://octopus.com/devops/software-deployments/canary-deployment/
 -   Kim, G., Debois, P., Willis, J., Humble, J., & Allspaw, J. (2016). The DevOps Handbook: How to Create World-Class Agility, Reliability, and Security in Technology Organizations. IT Revolution Press.
 -   IBM Skills Network. (s. f.). Introduction to DevOps [Curso en línea]. Coursera. Recuperado de https://www.coursera.org/learn/intro-to-devops
 -   Synack. (s. f.). Understanding the difference between DAST vs. SAST for application security testing [Knowledge Base article]. Recuperado de https://www.synack.com/knowledge-base/understanding-the-difference-between-dast-vs-sast-for-application-security-testing/

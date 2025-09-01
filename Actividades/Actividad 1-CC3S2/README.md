@@ -2,7 +2,7 @@
 
 -   Nombre: Diego Edson Bayes Santos
 -   Fecha: 30/08/2025
--   Tiempo total: 1h
+-   Tiempo total: 3h
 -   Entorno usado: Esta actividad se realizó en una laptop personal con el sistema operativo Windows, en el IDE Visual Studio Code.
 
 ### 1. DevOps vs. Cascada Tradicional (Investigación + Comparación)
@@ -58,3 +58,47 @@ Por último, para evitar el avance del desarrollo sin reducción real de riesgos
 
 -   Señal de eficacia 1: Las vulnerabilidades repetidas entre cambios representan menos del 10% en una iteración. Pueden ser comparadas automáticamente mediante el historial de informes de SAST y DAST.
 -   Señal de eficacia 2: El promedio en el tiempo de remediación de una vulnerabilidad decrece con el tiempo. También medible con el historial de informes previamente mencionado.
+
+### 5. CI/CD y estrategias de despliegue (sandbox, canary, azul/verde)
+
+![Canary deployment](./imagenes/pipeline_canary.jpg)
+
+Para un microservicio crítico como el sistema de pagos, se opta por una estrategia de _canary_, debido a que es fallos en esta área puede implicar problemas legales y un gran impacto en la confiabilidad del software y la empresa propietaria, por lo que reducir el despliegue inicia a un conjunto pequeño de usuarios, mitiga el número de incidencias.
+
+| Riesgo                                   | Mitigación                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------- |
+| **Costo operativo del doble despliegue** | Definir un límite máximo de convivencia para la versión anterior.         |
+| **Incremento en latencia**               | Pruebas de carga automatizadas previas y monitoreo de KPIs en producción. |
+| **Alcance limitado**                     | Selección correcta de cantidad y diversidad de usuarios.                  |
+
+Para este caso, se puede utilizar el porcentaje de respuestas _5XX_ como KPI primario.
+
+-   Umbral: $\leq$**0.5%** de errores 5xx
+-   Ventana de observación: 30 minutos
+
+Adicionalmente, si se cumplen los KPIs técnicos, pero se cae alguna métrica de producto, se debe reevaluar la toma de decisiones, pues se puede generar frustración en los usuarios a pesar de la carencia de errores técnicos. Estas métricas de producto, por ejemplo la tasa de cancelación de compra, reflejan el impacto real de los cambios a nivel financiero.
+
+### 6. Fundamentos prácticos sin comandos (evidencia mínima)
+
+#### HTTP - contrato observable
+
+Para la URL seleccionada, se reporta lo siguiente:
+
+-   Se registró el método GET, tal como se esperaba por defecto al no solicitar otro método.
+-   Se recibió 200 como _status code_ indicando la respuesta exitosa.
+-   Cabeceras clave: _cache-control_ y _x-cache_
+
+La cabecera _cache-control_ es importante para temas de rendimiento. Al no almacenar caché, se aumenta la latencia percibida y se incrementa la carga en el servidor, a cambio de siempre obtener la versión más reciente. Se debe incluir cabecera de trazabilidad para la observabilidad. Por otro lado, _x-cache_ da visibilidad sobre el status del caché para el CDN. Esto permite monitorear la cantidad de HITs en comparación a la cantidad de MISS para detectar posibles fallas en la optimización.
+
+#### DNS - nombres y TTL
+
+Para la URL seleccionada, se reporta lo siguiente:
+
+-   Se identificó el tipo de registro CNAME, usado para alias
+-   Se registró un TTL de 0, por lo que la respuesta es descartada inmediatamente.
+
+Los TTL bajos permiten _rollbacks_ más rápidos al tener menor latencia entre los cambios, con el sacrificio de tener que realizar mayor cantidad de consultas y, por lo tanto, mayores recursos empleados.
+
+### 7. Desafíos de DevOps y mitigaciones
+
+### 8. Arquitectura mínima para DevSecOps (HTTP/DNS/TLS + 12-Factor)
