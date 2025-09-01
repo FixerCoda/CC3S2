@@ -2,7 +2,7 @@
 
 -   Nombre: Diego Edson Bayes Santos
 -   Fecha: 30/08/2025
--   Tiempo total: 3h
+-   Tiempo total: 5h
 -   Entorno usado: Esta actividad se realizó en una laptop personal con el sistema operativo Windows, en el IDE Visual Studio Code.
 
 ### 1. DevOps vs. Cascada Tradicional (Investigación + Comparación)
@@ -61,7 +61,7 @@ Por último, para evitar el avance del desarrollo sin reducción real de riesgos
 
 ### 5. CI/CD y estrategias de despliegue (sandbox, canary, azul/verde)
 
-![Canary deployment](./imagenes/pipeline_canary.jpg)
+![Despliegue Canary](./imagenes/pipeline_canary.jpg)
 
 Para un microservicio crítico como el sistema de pagos, se opta por una estrategia de _canary_, debido a que es fallos en esta área puede implicar problemas legales y un gran impacto en la confiabilidad del software y la empresa propietaria, por lo que reducir el despliegue inicia a un conjunto pequeño de usuarios, mitiga el número de incidencias.
 
@@ -73,7 +73,7 @@ Para un microservicio crítico como el sistema de pagos, se opta por una estrate
 
 Para este caso, se puede utilizar el porcentaje de respuestas _5XX_ como KPI primario.
 
--   Umbral: $\leq$**0.5%** de errores 5xx
+-   Umbral: $\leq$**0.5%** de errores _5XX_
 -   Ventana de observación: 30 minutos
 
 Adicionalmente, si se cumplen los KPIs técnicos, pero se cae alguna métrica de producto, se debe reevaluar la toma de decisiones, pues se puede generar frustración en los usuarios a pesar de la carencia de errores técnicos. Estas métricas de producto, por ejemplo la tasa de cancelación de compra, reflejan el impacto real de los cambios a nivel financiero.
@@ -99,6 +99,41 @@ Para la URL seleccionada, se reporta lo siguiente:
 
 Los TTL bajos permiten _rollbacks_ más rápidos al tener menor latencia entre los cambios, con el sacrificio de tener que realizar mayor cantidad de consultas y, por lo tanto, mayores recursos empleados.
 
+#### TLS - seguridad en el tránsito
+
+Para la URL seleccionada, se reporta lo siguiente:
+
+-   El certificado principal incluye 'uni.pe' como CN y una vigencia desde el 23 de febrero del 2025 hasta el 24 de marzo del 2026.
+-   La emisora del certificadora principal es Amazon RSA 2048 M02, y siguiendo la cadena de certificados, la certificadora inicial es Starfield Services Root Certificate Authority.
+
+La verificación de la cadena de certificados es un paso fundamental en la implementación de la seguridad de un software. El riesgo principal es el acceso a un canal no seguro producto de un certificado falso. Esto conlleva posibles ataques _man-in-the-middle_ (MITM) en los que se simula estar conectado al servicio original para obtener, modificar o borrar la información transmitida.
+
+#### Puertos - estados de runtime
+
+Para mi máquina, se identifican los siguientes puertos en escucha:
+
+-   Puerto 80: Por defecto, el puerto usado para peticiones HTTP
+-   Puerto 443: Por defecto, el puerto asignado para el protocolo HTTPS
+
+El estado LISTEN o en escucha indica que el puerto se encuentra disponible para su uso. Por lo tanto, mediante esta herramienta, se puede detectar si un puerto no ha sido expuesto correctamente (despliegues incompletos) o si se encuentra actualmente ocupado por otro servicio.
+
+#### 12-Factor - port binding, configuración, logs
+
+-   Para asignar un puerto sin necesidad de definirlo en código, se puede usar variables de entorno y automatizar su parametrización mediante archivos de configuración (por ejemplo, con el uso de YAML).
+-   En un flujo estándar, los logs en ejecución se escriben en los canales _stdout_ o _stderr_. Estos se pueden recolectar con herramientas del contenedor usado y escribirlos localmente rompería la portabilidad y dificultaría su recopilación tras varias iteraciones.
+-   El antipatrón de _hard-coded credentials_ rompe la tercera regla del 12-Factor e impacta seriamente tanto en la seguridad como en la reproducibilidad del código en diferentes ambientes (con diferentes credenciales o generación de credenciales temporales).
+
+#### Checklist de diagnóstico (incidente simulado)
+
+-   Se verifica el contrato HTTP con el objetivo de confirmar la respuesta válida del servidor. Una respuesta con un código de estado 200 es esperada para indicar una conexión correcta. Si se recibe _5XX_, se revisa el servidor backend.
+-   Se verifica la resolución DNS para descartar inconsistencias en los registros. Se espera el mismo IP en todos los _resolvers_ para mostrar una resolución estable. Si se encuentran diferencias, se revisa el proceso de configuración.
+-   Se valida la vigencia del certificado TLS. La fecha actual debe estar en el rango recibido y la cadena de certificados debe mostrar un CA confiable. Si se comprueba caducidad o CN/SAN incorrectos, se procede a renovar el certificado.
+-   Se revisa mide la latencia del TLS handshake. Se espera tiempos menores a los permitidos para confirmar que no existan _timeouts_. Si la latencia es mayor, se revisa las configuraciones de red y de seguridad para buscar posibles vulneraciones.
+-   Se lista los puertos en escucha para confirmar que estén disponibles para su uso. Se espera que se encuentren en estado LISTEN. Si se detecta un puerto ausente u ocupado, se revisa la configuración del _port binding_.
+-   Se correlacionan los logs de aplicación y reverse proxy para determinar el origen de la intermitencia. Según la respuesta, se determina la causa como un backend saturado o intermitencia en la red del cliente.
+
 ### 7. Desafíos de DevOps y mitigaciones
+
+![Desafios DevOps](./imagenes/desafios_devops.png)
 
 ### 8. Arquitectura mínima para DevSecOps (HTTP/DNS/TLS + 12-Factor)
