@@ -44,7 +44,7 @@ Una muestra de la agilización y la mejora de la colaboración del DevOps es el 
 El SAST (Static Application Security Testing) es una técnica que analiza el código de una aplicación para identificar vulnerabilidades dentro del código mismo, es decir sin ser ejecutado; mientras que DAST (Dynamic Application Security Testing) lo prueba desde el exterior y en ejecución, simulando la perspectiva de un ataque de seguridad (Synack, s. f). El primero puede ser utilizado durante las etapas de CI como un añadido de seguridad. DAST se emplea en entornos de _staging_ dentro del CD para detectar vulnerabilidades del software en ejecución.  
 Un ejemplo de gate mínimo de seguridad puede estar definido con los siguientes umbrales:
 
--   Umbral 1: Se requiere 0 vulnerabilidades críticas o de alta severidad (CVSS >= 7.0) detectadas por SAST durante la integración continua.
+-   Umbral 1: Se requiere 0 vulnerabilidades críticas o de alta severidad (CVSS $\geq$ 7.0) detectadas por SAST durante la integración continua.
 -   Umbral 2: El 95% de las pruebas que involucren datos del usuario deben ser validadas por DAST en el entorno de _staging_.
 
 Además, una política de excepción puede ser la siguiente:
@@ -73,7 +73,7 @@ Para un microservicio crítico como el sistema de pagos, se opta por una estrate
 
 Para este caso, se puede utilizar el porcentaje de respuestas _5XX_ como KPI primario.
 
--   Umbral: $\leq$**0.5%** de errores _5XX_
+-   Umbral: $\leq$ 0.5% de errores _5XX_
 -   Ventana de observación: 30 minutos
 
 Adicionalmente, si se cumplen los KPIs técnicos, pero se cae alguna métrica de producto, se debe reevaluar la toma de decisiones, pues se puede generar frustración en los usuarios a pesar de la carencia de errores técnicos. Estas métricas de producto, por ejemplo la tasa de cancelación de compra, reflejan el impacto real de los cambios a nivel financiero.
@@ -136,4 +136,24 @@ El estado LISTEN o en escucha indica que el puerto se encuentra disponible para 
 
 ![Desafios DevOps](./imagenes/desafios_devops.png)
 
+#### Riesgos y mitigaciones
+
+-   La detección de vulnerabilidades críticas que no fueron identificadas durante su desarrollo ni revisión puede ser mitigada con despliegues graduales como el despliegue _canary_ para no afectar a la totalidad de usuarios.
+-   La revisión no exhaustiva del código por parte de algún miembro de un equipo DevOps puede conllevar a generar errores lógicos en el programa y en las pruebas. Se mitiga mediante estrategias de colaboración como la revisión cruzada en cada etapa del desarrollo.
+-   Posibles fallas en servicios pueden afectar al resto y provocar una falla total del software, a pesar de la arquitectura poco acoplada. Se deben implementar patrones como _circuit breaker_ o _bulkhead_ para disminuir el alcance del error o _blast radius_.
+
+#### Experimento controlado
+
+Se debe actualizar una versión de software y se presentan 2 alternativas. Una estrategia de despliegue _blue-green_ en la cual se aplica los cambios a todos los usuarios, pero se mantiene en producción la versión anterior para permitir una reversión rápida; y una estrategia de despliegue gradual en la que se va liberando la nueva versión a un porcentaje de usuarios cada vez mayor. Para criterios del experimento, se injectará una intermitencia en la latencia en la nueva versión.
+
+-   Métrica primaria: Cantidad de errores _5XX_ tras la primera hora del release
+-   Grupo de control: Se divide a los usuarios en 2 grupos similares. El primer grupo se actualizará a la nueva versión simultáneamente (_big bang_) y al segundo se le liberará progresivamente: 5% del grupo inicialmente, 25% tras 15 minutos, 50% tras 30 minutos y 100% tras 45 minutos. Cada etapa del segundo grupo iniciará únicamente si la etapa anterior presenta una tasa de error $\leq$ 1%.
+-   Criterio de éxito: El despliegue gradual debe mostrar una tasa de error mucho menor (por ejemplo $\leq$ 50%) del despliegue _big bang_ debido a la diferencia en la cantidad de usuarios en cada grupo y el tamaño de la ventana para detección de errores.
+-   Plan de reversión: Se detiene el _rollout_ para el segundo grupo y se revierte a la versión anterior al segmento afectado. Para el primer grupo, se realiza un _rollback_ completo e inmediato gracias al despliegue _blue-green_.
+
 ### 8. Arquitectura mínima para DevSecOps (HTTP/DNS/TLS + 12-Factor)
+
+![Arquitectura mínima](./imagenes/arquitectura-minima.png)
+
+La primera capa asegura la integridad del despliegue y evita inconsistencias entre entornos. Una selección correcta de las políticas de caché y ajuste del TTL ayuda a una propagación rápida de cambios. El uso de HTTP previene errores en cambios de versión. Se recomienda almacenar los logs de resultados. Además, una validación de certificados en la última capa permite verificar la confiabilidad del software. Se acompaña de nua rotación automática y monitoreo de expiración para presentar los certificados válidos en todo momento.  
+El software debe comportarse similar en los diferentes entornos (principio 10) para agilizar el despliegue. Debe haber diferencias mínimas en los entornos y se debe monitorear los manifiestos para evitar incongruencias y solo variar las variables de entorno. Además, cada etapa debe tratar a los logs como un flujo de eventos, en vez de independientes, para mejorar la trazabilidad de todo el monitoreo.
