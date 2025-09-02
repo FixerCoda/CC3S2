@@ -1,0 +1,565 @@
+Script started on 2025-09-01 21:45:42-05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+[?2004h]0;fixercoda@RUBICK: ~/lab-clifixercoda@RUBICK:~/lab-cli$ cd /etc
+[?2004l[?2004h]0;fixercoda@RUBICK: /etcfixercoda@RUBICK:/etc$ ls -a > ~/etc_lista.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: /etcfixercoda@RUBICK:/etc$ file etc_lista.txt
+[?2004letc_lista.txt: cannot open `etc_lista.txt' (No such file or directory)
+[?2004h]0;fixercoda@RUBICK: /etcfixercoda@RUBICK:/etc$ cd ~
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ file etc_lista.txt
+[?2004letc_lista.txt: ASCII text
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ head -n 10 etc_lista.txt
+[?2004l.
+..
+.pwd.lock
+.resolv.conf.systemd-resolved.bak
+.updated
+PackageKit
+X11
+adduser.conf
+alternatives
+apache2
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ wc -l ectc_lista.txt
+[?2004l176 etc_lista.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ wc -l etc_lista.txt > touch /tmp/cli-ejemplo-1.txt /tpmp/cli-jempejemplo-2.doc ?-/ tmp/cli-ejemplo-3.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find /tmp- -maxdepth 1 -type f ~\( =-name '*.txt*' -o n-name '*.doc' \() | wc. -lsort
+[?2004l/tmp/cli-ejemplo-1.txt
+/tmp/cli-ejemplo-2.doc
+/tmp/cli-ejemplo-3.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find /tmp -maxdepth 1 -type f \( -name '*.txt' -o -name '*.doc' \) | sort | wc -l
+[?2004l3
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find /tmp -maxdepth 1 -type f \( -name '*.txt' -o -name '*.doc' \) | sort | wc -l |tee lista_tmp_txt_doctxt 
+.tx t
+[?2004l/tmp/cli-ejemplo-1.txt
+/tmp/cli-ejemplo-2.doc
+/tmp/cli-ejemplo-3.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat lista_tmp_txt_doc.txt 
+[?2004l/tmp/cli-ejemplo-1.txt
+/tmp/cli-ejemplo-2.doc
+/tmp/cli-ejemplo-3.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "LineaPrueba1\nLineapPrueba2\n:" > texst.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ nl -bcat test.txt
+[?2004lLineaPrueba1
+LineaPrueba2
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ nl -ba test.txt
+[?2004l     1	LineaPrueba1
+     2	LineaPrueba2
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls comandoinvalidaddo 2>> erorres.log || eores.log rerrores.log || true
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat errores.log
+[?2004lls: cannot access 'comandoinvalido': No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat errores.logls comandoinvalido 2> errores.log || true[1@?[1@>[1@2
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls comandoinvalido2 2>> errores.log || truecat errores.log
+[?2004lls: cannot access 'comandoinvalido': No such file or directory
+ls: cannot access 'comandoinvalido2': No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find .. -maxdepth 1 -name 'archivotail -n + 11 errores.log
+[?2004lls: cannot access 'comandoinvalido': No such file or directory
+ls: cannot access 'comandoinvalido2': No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ nl testtxt.txt
+[?2004l     1	LineaPrueba1
+     2	LineaPrueba2
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ wc -l lista.txt
+[?2004lwc: lista.txt: No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls
+[?2004lCC3S2  conteo_tmp_txt_doc.txt  errores.log  etc_lista.txt  lab-cli  lista_tmp_txt_doc.txt  test.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ wc - ll etc_lista.txt
+[?2004l176 etc_lista.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ touch archivo1.txt archivo2txt archivo3.doc
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls -1 archiovo*
+[?2004larchivo1.txt
+archivo2txt
+archivo3.doc
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find . -madxdepth 1 -nae -me ;-archi'archivo*.txt' | arxargs -r echo rm --
+[?2004lrm -- ./archivo1.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find . -maxdepth 1 -name 'archivo*.txt' | xargs -r echo rm --ls -1 archivo*
+[?2004larchivo1.txt
+archivo2txt
+archivo3.doc
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ rm ls -1 archivo*find . -maxdepth 1 -name 'archivo*.txt' | xargs -r echo rm --=-
+[?2004lrm -- ./archivo2txt ./archivo1.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find . -maxdepth 1 -name 'archivo*txt' | xargs -r echo rm --ls -1 archivo*rm -- ./archivo1.txt ./archivo2txt ./archivo
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ rm -- ./archivo1.txt ./archivo2txtfind . -maxdepth 1 -name 'archivo*txt' | xargs -r echo rm --[1@.[1@d[1@o[1@c
+[?2004lrm -- ./archivo3.doc
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ rm ---- ./archivo3.doc
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sudo adduser devsec
+[?2004l[sudo] [REDACTED] for fixercoda: 
+info: Adding user `devsec' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `devsec' (1001) ...
+info: Adding new user `devsec' (1001) with group `devsec (1001)' ...
+info: Creating home directory `/home/devsec' ...
+info: Copying files from `/etc/skel' ...
+New [REDACTED]: 
+Retype new [REDACTED]: 
+No [REDACTED] has been supplied.
+New [REDACTED]: 
+Retype new [REDACTED]: 
+passwd: [REDACTED] updated successfully
+Changing the user information for devsec
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] Y
+info: Adding new user `devsec' to supplemental / extra groups `users' ...
+info: Adding user `devsec' to group `users' ...
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sudo addgroup ops
+[?2004linfo: Selecting GID from range 1000 to 59999 ...
+info: Adding group `ops' (GID 1002) ...
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sudo addsudo usermod -aG ops devsedc
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ touch [REDACTED]ot.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sudo chown decvsec:poops [REDACTED]otxt.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sudo chomod 640 [REDACTED]o.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ getent passwd devsed | tee envidencia_passwd_devsectxt.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ getent group ops | tee evidencia_goroup_ops.txt
+[?2004lops:x:1002:devsec
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ getent namei -l [REDACTED]o.txt | tee evidencia_namei_[REDACTED]o.txt
+[?2004lf: [REDACTED]o.txt
+-rw-r----- devsec ops [REDACTED]o.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ stat -c ' '^%A ^%a %U %G %n' [REDACTED]o.txt | tee evidencia_stat_[REDACTED]o.txt
+[?2004l-rw-r----- 640 devsec ops [REDACTED]o.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ whoami | tee evidencia_whoamitxt.txt
+[?2004lfixercoda
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps aux | tee evidencia_ps.as_ausx.txt
+[?2004lUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1  21684 13068 ?        Ss   21:04   0:00 /sbin/init
+root           2  0.0  0.0   2280  1300 ?        Sl   21:04   0:00 /init
+root           7  0.0  0.0   2296   132 ?        Sl   21:04   0:00 plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate
+root          49  0.0  0.2  66824 17636 ?        S<s  21:04   0:00 /usr/lib/systemd/systemd-journald
+root          94  0.0  0.0  23860  6096 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     106  0.0  0.1  21452 11848 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-resolved
+systemd+     107  0.0  0.0  91020  6592 ?        Ssl  21:04   0:00 /usr/lib/systemd/systemd-timesyncd
+root         142  0.0  0.0   4236  2604 ?        Ss   21:04   0:00 /usr/sbin/cron -f -P
+message+     143  0.0  0.0   9596  5076 ?        Ss   21:04   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         151  0.0  0.1  17976  8232 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-logind
+root         154  0.0  0.2 1756096 16020 ?       Ssl  21:04   0:00 /usr/libexec/wsl-pro-service -vv
+root         159  0.0  0.0   3160  1140 hvc0     Ss+  21:04   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud - 115200,38400,9600 vt220
+root         165  0.0  0.0   3116  1108 tty1     Ss+  21:04   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         174  0.0  0.0  11548  1316 ?        Ss   21:04   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data     175  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     176  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     178  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+syslog       179  0.0  0.0 222508  5308 ?        Ssl  21:04   0:00 /usr/sbin/rsyslogd -n -iNONE
+www-data     180  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     183  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     185  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     186  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     187  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     188  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     189  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     190  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     191  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     193  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     195  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     196  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     198  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+root         205  0.0  0.2 107008 22448 ?        Ssl  21:04   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         288  0.0  0.0   2296   112 ?        Ss   21:04   0:00 /init
+root         289  0.0  0.0   2296   120 ?        S    21:04   0:00 /init
+fixerco+     290  0.0  0.0   6072  5240 pts/0    Ss   21:04   0:00 -bash
+root         291  0.0  0.0   6696  4596 pts/1    Ss   21:04   0:00 /bin/login -f
+fixerco+     343  0.0  0.1  20256 11528 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd --user
+fixerco+     344  0.0  0.0  21144  1724 ?        S    21:04   0:00 (sd-pam)
+fixerco+     359  0.0  0.0   6072  5272 pts/1    S+   21:04   0:00 -bash
+fixerco+     526  0.0  0.0   3148  1188 pts/0    S+   21:46   0:00 script -q evidencias/sesion.txt
+fixerco+     527  0.0  0.0   6204  5380 pts/2    Ss   21:46   0:00 bash -i
+fixerco+     689  0.0  0.0   8284  4028 pts/2    R+   22:07   0:00 ps aux
+fixerco+     690  0.0  0.0   3136  1108 pts/2    S+   22:07   0:00 tee evidencia_ps_aux.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "%%"$$"
+[?2004l527
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps aux | grep bash
+[?2004lfixerco+     290  0.0  0.0   6072  5240 pts/0    Ss   21:04   0:00 -bash
+fixerco+     359  0.0  0.0   6072  5272 pts/1    S+   21:04   0:00 -bash
+fixerco+     527  0.0  0.0   6204  5380 pts/2    Ss   21:46   0:00 bash -i
+fixerco+     692  0.0  0.0   4092  2024 pts/2    S+   22:08   0:00 grep --color=auto bash
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps -p "$$" -o pid,ppid,uid,user,comm,etime | 
+[?2004l    PID    PPID   UID USER     COMMAND             ELAPSED
+    527     526  1000 fixerco+ bash                  23:23
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps aux | grep bah sh | tee evidencia_pid_grep.txt
+[?2004lfixerco+     290  0.0  0.0   6072  5240 pts/0    Ss   21:04   0:00 -bash
+fixerco+     359  0.0  0.0   6072  5272 pts/1    S+   21:04   0:00 -bash
+fixerco+     527  0.0  0.0   6204  5380 pts/2    Ss   21:47   0:00 bash -i
+fixerco+     697  0.0  0.0   4092  1924 pts/2    S+   22:10   0:00 grep --color=auto bash
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps aux | grep bash | tee evidencia_pid_grep.txt-p "$$" -o pid,ppid,uid,user,comm,etimeaux | grep bashecho "$$" | tee evidencia_sellhell_pid.txt
+[?2004l527
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "$$" | tee evidencia_shell_pid.txtps aux | grep bash | tee evidencia_pid_grep.txt-p "$$" -o pid,ppid,uid,user,comm,etime | tee evidencia_ps_sheel.txt
+[?2004l    PID    PPID   UID USER     COMMAND             ELAPSED
+    527     526  1000 fixerco+ bash                  24:11
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ kill -o "$$$" echo "Shell vivo (PID $$): |" | tee -a evidencia_signal_check.txt
+[?2004lbash: kill: o: invalid signal specification
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ kill -o "$$" echo "Shell vivo (PID $$)" | tee -a evidencia_signal_check.txt[1@0
+[?2004lbash: kill: echo: arguments must be process or job IDs
+bash: kill: Shell vivo (PID 527): arguments must be process or job IDs
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ fomd / =axde[tj 1 =ma,e 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*''evidencia*' 'evidencia*''evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*' 'evidencia*''evidencia*' 'evidencia*''evidencia*' 'evidencia*' 'evidencia*' 'evidencia*'i 'evidencia*'n 'evidencia*'kill -0 "$$" echo "Shell vivo (PID $$)" | tee -a evidencia_signal_check.txtops -p "$$" -o pid,ppid,uid,user,comm,etime | tee evidencia_ps_sheel.txtecho "$$" | tee evidencia_shell_pid.txtps aux | grep bash | tee evidencia_pid_grep.txt-p "$$" -o pid,ppid,uid,user,comm,etimeaux | grep bashecho "$$"ps aux | tee evidencia_ps_aux.txtwhoami | tee evidencia_whoami.txtstat -c '%A %a %U %G %n' [REDACTED]o.txt | tee evidencia_stat_[REDACTED]o.txtnamei -l [REDACTED]o.txt | tee evidencia_namei_[REDACTED]o.txtgetent group ops | tee evidencia_group_ops.txtpasswd devsed | tee evidencia_passwd_devsec.txtsudo chmod 640 [REDACTED]o.txt[7@own devsec:opstouchsudo usermod -aG ops devsecaddgroup opsuser devsecrm -- ./archivo3.docfind . -maxdepth 1 -name 'archivo*.doc' | xargs -r echo rm --rm -- ./archivo1.txt ./archivo2txtfind . -maxdepth 1 -name 'archivo*.doc' | xargs -r echo rm --''''''''''''e'v'i'd'e'n'c'i'a'*'
+[?2004l./evidencia_pid_grep.txt
+./evidencia_shell_pid.txt
+./evidencia_stat_[REDACTED]o.txt
+./evidencia_group_ops.txt
+./evidencia_ps_sheel.txt
+./evidencia_ps_aux.txt
+./evidencia_namei_[REDACTED]o.txt
+./evidencia_passwd_devsec.txt
+./evidencia_signal_check.txt
+./evidencia_whoami.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ bash -c 'sleep 999 ; ' ^&
+[?2004l[1] 708
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ECO_HO_BG_PID=$!
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "ECHO_BG_PID#ECHO_BG_PIDECHO_BG_PID$ECHO_BG_PID" | tee evivdencia_pid_bg.txt
+[?2004l708
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps -p "#@#$ECJOJPHO_NBG_PID:" -o pid,ppid,comm,etieme | tee evidencia_ps_bg_antes..txttxt
+[?2004l    PID    PPID COMMAND             ELAPSED
+    708     527 sleep                 01:04
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ kill -SIGTERM "$$ECHO_BG_BPID"
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sleep 0,3.3
+[?2004l[1]+  Terminated              bash -c 'sleep 999'
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps -p "$ECOHO_BG_PID#" -o ppidid,ppid,comm,etime | tee evidencia_ps_bhg_despues.txt || ecchoho "Terminado OK: 
+"LK: 
+"  | tee -a evidencia_ps_bg_despuestxt.txt
+[?2004l    PID    PPID COMMAND             ELAPSED
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat evidencia__ps_vbg_despues.txt 
+[?2004l    PID    PPID COMMAND             ELAPSED
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "termiTerminado OK:" | tee -a evidencia_ps_bg_despues.txt 
+[?2004lTerminado OK
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat evidencia_ps_becho "Terminado OK" | tee -a evidencia_ps_bg_despues.txt cat
+[?2004l    PID    PPID COMMAND             ELAPSED
+Terminado OK
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ if command -v systemctl >/dev?null?/null 2>^&1l1l; then e
+[?2004l[?2004h> echo :"systemctl OK" | tee evidencia_systemd_detect.txt
+[?2004l[?2004h> else
+[?2004l[?2004h> ehco "cho "systemctl NO disponible |"e" | tee evidencia_systemd_dectect.txt
+[?2004l[?2004h> fi
+[?2004lsystemctl OK
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ systemctl status systemd-llogind
+[?2004l[?1h=● systemd-logind.service - User Login Management
+     Loaded: loaded (]8;;file://RUBICK/usr/lib/systemd/system/systemd-logind.service/usr/lib/systemd/system/systemd-logind.service]8;;; static)
+    Drop-In: /usr/lib/systemd/system/systemd-logind.service.d
+             └─]8;;file://RUBICK/usr/lib/systemd/system/systemd-logind.service.d/dbus.confdbus.conf]8;;
+     Active: active (running) since Mon 2025-09-01 21:01:01 -05; 1h 19min ago
+       Docs: ]8;;man:sd-login(3)man:sd-login(3)]8;;
+             ]8;;man:systemd-logind.service(8)man:systemd-logind.service(8)]8;;
+             ]8;;man:logind.conf(5)man:logind.conf(5)]8;;
+             ]8;;man:org.freedesktop.login1(5)man:org.freedesktop.login1(5)]8;;
+   Main PID: 151 (systemd-logind)
+     Status: "Processing requests..."
+      Tasks: 1 (limit: 9300)
+   FD Store: 0 (limit: 512)
+     Memory: 1.7M ()
+     CGroup: /system.slice/systemd-logind.service
+             └─151 /usr/lib/systemd/systemd-logind
+
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.
+[?1l>[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ systemctl status systemd-logind --no-pager | tee evidencia_status_logind.tsxt
+[?2004l● systemd-logind.service - User Login Management
+     Loaded: loaded (/usr/lib/systemd/system/systemd-logind.service; static)
+    Drop-In: /usr/lib/systemd/system/systemd-logind.service.d
+             └─dbus.conf
+     Active: active (running) since Mon 2025-09-01 21:01:01 -05; 1h 20min ago
+       Docs: man:sd-login(3)
+             man:systemd-logind.service(8)
+             man:logind.conf(5)
+             man:org.freedesktop.login1(5)
+   Main PID: 151 (systemd-logind)
+     Status: "Processing requests..."
+      Tasks: 1 (limit: 9300)
+   FD Store: 0 (limit: 512)
+     Memory: 1.7M ()
+     CGroup: /system.slice/systemd-logind.service
+             └─151 /usr/lib/systemd/systemd-logind
+
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ hhojournalctl -u systemd-logind -n 190 --no-pager | tee evidencia_journal_logind_ultimos10.txt
+[?2004lSep 01 08:04:32 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 08:04:34 RUBICK systemd-logind[163]: New session 1 of user fixercoda.
+Sep 01 14:49:33 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 14:49:33 RUBICK systemd-logind[159]: New seat seat0.
+Sep 01 14:49:33 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 14:49:35 RUBICK systemd-logind[159]: New session 10 of user fixercoda.
+-- Boot d5576abdf123491f8fd244d24e081f6b --
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ journalctl -u systemd-logind -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt[1@ [1@-[1@-[1@s[1@i[1@n[1@c[1@e[1@ " -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt ]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ t -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ o -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ d -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ a -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ y -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ " -n 10 --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  --no-pager | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ --no-pager | tee evidencia_journal_logind_ultimos10.txt  tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ h tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ e tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ a tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ d tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ - tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ - tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ n tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ 5 tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ 0 tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ | tee evidencia_journal_logind_ultimos10.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ 
+.txt.txt.txt.txt.txt.txt.txt.txt.txth.txto.txty.txt_.txth.txte.txta.txtd.txt5.txt0.txt
+[?2004lSep 01 08:04:31 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 08:04:32 RUBICK systemd-logind[163]: New seat seat0.
+Sep 01 08:04:32 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 08:04:34 RUBICK systemd-logind[163]: New session 1 of user fixercoda.
+Sep 01 14:49:33 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 14:49:33 RUBICK systemd-logind[159]: New seat seat0.
+Sep 01 14:49:33 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 14:49:35 RUBICK systemd-logind[159]: New session 10 of user fixercoda.
+-- Boot d5576abdf123491f8fd244d24e081f6b --
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sleep 100 ^&
+[?2004l[1] 750
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ SLEEP_PID=%^&!%$!
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "#SL#@$SLEEEP_PID" | tee evidencia_sleep_ipdtxpid.txt
+[?2004l750
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps -p "$SLEEP_PID:" -o pid,ppid,comm,etime | tee evidencia_ps_sleep_antexs.txt
+[?2004l    PID    PPID COMMAND             ELAPSED
+    750     527 sleep                 00:38
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ kill -sSIGTERM "$SLEEP_PID"
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sleep 0.43
+[?2004l[1]+  Terminated              sleep 100
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sleep 0.3kill -SIGTERM "$SLEEP_PID"ps -p "$SLEEP_PID" -o pid,ppid,comm,etime | tee evidencia_ps_sleep_antes.txtdespues.txt || echo "sleep(100) t erminado:" | tee- -a evidencia_ps_sleep_despues.txt
+[?2004l    PID    PPID COMMAND             ELAPSED
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ps -p "$SLEEP_PID" -o pid,ppid,comm,etime | tee evidencia_ps_sleep_despues.txt || echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtsleep 0.3
+ps -p "$SLEEP_PID" -o pid,ppid,comm,etime | tee evidencia_ps_sleep_despues.txt || echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) ter]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) term]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) termi]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) termin]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) termina]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminad]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado"]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" ]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" |]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | ]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | t]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | te]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee ]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtcho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtcho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtecho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtcho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee -a evidencia_ps_slep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cho "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txt 
+
+[?2004lsleep(100) terminado
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "sleep(100) terminado" | tee -a evidencia_ps_sleep_despues.txtcat evidencia_ps_sleep_despues.txt
+[?2004l    PID    PPID COMMAND             ELAPSED
+sleep(100) terminado
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ grep root \./etc/passw |d | tee evidencias_fgrep_root_passwd.txt
+[?2004lroot:x:0:0:root:/root:/bin/bash
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ sed 's?/datos1/[REDACTED]o/ ' datos.txt > nuevo.txt
+[?2004lsed: can't read datos.txt: No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ touch ecthoho "ho "Varidatosos0 datos1 datos2 datos3"  ?> datost..txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat datos.txt
+[?2004ldatos0 datos1 datos2 datos3
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat datos.txt[33@echo "datos0 datos1 datos2 datos3" >sed 's/datos1/[REDACTED]o/' datos.txt > nuevo.txt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat dnuevo.txt
+[?2004ldatos0 [REDACTED]o datos2 datos3
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ diff -u datos.txt nuevo.txt | tee evidencias?_diff_datos_nuevo.txtdiff_datos_nuevo.txtdiff_datos_nuevo.txt)diff_datos_nuevo.txtdiff_datos_nuevo.txt_diff_datos_nuevo.txt
+[?2004l--- datos.txt	2025-09-01 22:31:35.969940445 -0500
++++ nuevo.txt	2025-09-01 22:31:43.490723264 -0500
+@@ -1 +1 @@
+-datos0 datos1 datos2 datos3
++datos0 [REDACTED]o datos2 datos3
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat nuevo.txt | tee evidencias_nuevo_head.cat.txt
+[?2004ldatos0 [REDACTED]o datos2 datos3
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ awk -fF: '%P{print $1};' /etc/pssasswd | sort |uniq uniq
+[?2004l_apt
+backup
+bin
+daemon
+devsec
+dhcpcd
+fixercoda
+games
+irc
+landscape
+list
+lp
+mail
+man
+messagebus
+news
+nobody
+polkitd
+proxy
+root
+sync
+sys
+syslog
+systemd-network
+systemd-resolve
+systemd-timesync
+uucp
+uuidd
+www-data
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ awk -F: '{print $1}' /etc/passwd | sort | uniq | tee evidencias_usuarios_por_awk_sort_uniq.txt
+[?2004l_apt
+backup
+bin
+daemon
+devsec
+dhcpcd
+fixercoda
+games
+irc
+landscape
+list
+lp
+mail
+man
+messagebus
+news
+nobody
+polkitd
+proxy
+root
+sync
+sys
+syslog
+systemd-network
+systemd-resolve
+systemd-timesync
+uucp
+uuidd
+www-data
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ awk -F: '{print %$1{};' /etc/psasswd | LC_ALL=C sort -u | tee evidencia?usuarios?_usuarios_por_awk_sortu.txt
+[?2004l_apt
+backup
+bin
+daemon
+devsec
+dhcpcd
+fixercoda
+games
+irc
+landscape
+list
+lp
+mail
+man
+messagebus
+news
+nobody
+polkitd
+proxy
+root
+sync
+sys
+syslog
+systemd-network
+systemd-resolve
+systemd-timesync
+uucp
+uuidd
+www-data
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ head-  -n 15 evidencia_usuarios_por_awk_sort_uniq.txt 
+[?2004l_apt
+backup
+bin
+daemon
+devsec
+dhcpcd
+fixercoda
+games
+irc
+landscape
+list
+lp
+mail
+man
+messagebus
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ prinft "hola\nunix toolkit\n" | tr ;'a-z' -A[1@t[1@fA-Z' | tee mayous.tevidencia_mayustxtmayus.txt
+[?2004l[?2004h> 
+[?2004l[?2004h> cat mayus^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat mayus.txt
+[?2004lcat: mayus.txt: No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat mayus.txtprintf "hola\nunix toolkit\n" | tr 'a-z' A-Z' | tee mayus.txt
+n"
+[?2004lhola
+unix toolkit
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit\n"cat mayus.txtprintf "hola\nunix toolkit\n" | tr 'a-z' 'A_-Z'
+[?2004lHOLA
+UNIX TOOLKIT
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit\n" | tr 'a-z' 'A-Z'cat mayus.txtprintf "hola\nunix toolkit\n" | tr 'a-z' A-Z' | tee mayus.txt
+
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit\n" | tr 'a-z' A-Z' | tee mayus.txtemayus.txtvmayus.txtimayus.txtdmayus.txtemayus.txtnmayus.txtcmayus.txtimayus.txtamayus.txt_mayus.txt
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txtmayus.txtHDD[1@/[1@\[1@\
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txt
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ 
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit\n | tr 'a-z' A-Z' | tee evidencia_mayus.txt[1@'[1@'
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf 'hola\nunix toolkit\n' | tr 'a-z' A-Z' | tee evidencia_mayus.txt"hola\nunix toolkit\n\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txt
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola\nunix toolkit" | tr 'a-z' A-Z' | tee mayus.txt[1@ 
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ printf "hola unix toolkit" | tr 'a-z' A-Z' | tee mayus.txt[1@\[1@n
+[?2004l[?2004h> 
+[?2004l[?2004h> .
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo printf "hola\n" | tr 'a-z' A-Z' | tee mayus.txt
+
+.]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ [11@ unix toolkit
+
+[1@\n'hola\nunix toolkit\n' | tr 'a-z' A-Z' | tee evidencia_mayus.txt"hola\nunix toolkit\n\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txt
+[?2004l[?2004h> tee emayus.txt
+[?2004l[?2004h> |
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "hola unix" | tr 'a-z' 'A-Z' | tee test.txt
+echo "hola unix" | tr 'a-z' 'A-Z' | tee test.txt
+[?2004lHOLA UNIX
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat test.txt
+[?2004lHOLA UNIX
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ rm test.xttxt
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echorm test.txt[1@cat[36@echo "hola unix" | tr 'a-z' 'A-Z' | teeprintf "hola\nunix toolkit\n" | tr 'a-z' A-Z' |
+tee mayus.txt
+|]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ " | tr 'a-z' A-Z' | tee mayus.txt
+             
+.]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ [11@ unix toolkit
+
+[1@\n'hola\nunix toolkit\n' | tr 'a-z' A-Z' | tee evidencia_mayus.txt"hola\nunix toolkit\n\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txtmayus.txt[1@e[1@c[1@h[1@o
+[?2004l[?2004h> ^C[?2004l[?2004h[?2004l
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ echo "hola\nunix toolkit\n" | tr 'a-z' A-Z' | tee mayus.txtrm test.txt[1@cat[36@echo "hola unix" | tr 'a-z' 'A-Z' | teeprintf "hola\nunix toolkit\n" | tr 'a-z' A-Z' |
+tee mayus.txt
+|]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ " | tr 'a-z' A-Z' | tee mayus.txt
+             
+.]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ [11@ unix toolkit
+
+[1@\n'hola\nunix toolkit\n' | tr 'a-z' A-Z' | tee evidencia_mayus.txt"hola\nunix toolkit\n\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txt\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n | tr 'a-z' A-Z' | tee evidencia_mayus.txt\nunix toolkit\\n" | tr 'a-z' A-Z' | tee mayus.txtnunix toolkit\n" | tr 'a-z' A-Z' | tee evidencia_mayus.txt[1@;[1@'[1@[[1@:[1@L[1@:[1@;[1@o[1@l[1@o[1@w[1@e[1@r[1@:[1@][1@;[1@'[1@ [1@'[1@p[1@[[1@:[1@u[1@p[1@p[1@e[1@r[1@:[1@'[1@][1@;[1@'
+[?2004lHOLA
+UNIX TOOLKIT
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat ecidevidencia_mayosus.txt
+[?2004lHOLA
+UNIX TOOLKIT
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find /tmp -mtime -5 -type -f f 2>dev/null |L LC_ALL=C sort | tee evidencia_tmp_mod_5d.txt
+[?2004lbash: dev/null: No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find /tmp -mtime -5 -type f 2>dev/null | LC_ALL=C sort | tee evidencia_tmp_mod_5d.txt[1@/[1@/
+[?2004l/tmp/cli-ejemplo-1.txt
+/tmp/cli-ejemplo-2.doc
+/tmp/cli-ejemplo-3.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ wc -l evidencia_tmp_mod_5d.txt | tee evidencia_tmp_mod_5d_conteo.xtxt
+[?2004l3 evidencia_tmp_mod_5d.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls /etc | grep conf | LC_ALL=C sort | tee list_conf.txt | wc- -l | tee conteo_conf.txt
+[?2004l31
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ head -n 20 lista_conf.txt | tee evidenciilista_conf_head.txt
+[?2004lhead: cannot open 'lista_conf.txt' for reading: No such file or directory
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ head -n 20 lista_conf.txt | tee lista_conf_head.txthead -n 20 lista_conf.txt | tee lista_conf_head.txt_conf_head.txt
+[?2004ladduser.conf
+ca-certificates.conf
+dconf
+debconf.conf
+deluser.conf
+dhcpcd.conf
+e2scrub.conf
+fuse.conf
+gai.conf
+host.conf
+ld.so.conf
+ld.so.conf.d
+libaudit.conf
+locale.conf
+logrotate.conf
+manpath.config
+mke2fs.conf
+netconfig
+nftables.conf
+nsswitch.conf
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$  cat conteo_conf.txt
+[?2004l31
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ if [-f ls
+[?2004lCC3S2                                    evidencia_pid_bg.txt            evidencia_tmp_mod_5d.txt
+conteo_conf.txt                          evidencia_pid_grep.txt          evidencia_tmp_mod_5d_conteo.txt
+conteo_tmp_txt_doc.txt                   evidencia_ps_aux.txt            evidencia_usuarios_por_awk_sort_uniq.txt
+datos.txt                                evidencia_ps_bg_antes.txt       evidencia_usuarios_por_awk_sortu.txt
+errores.log                              evidencia_ps_bg_despues.txt     evidencia_whoami.txt
+etc_lista.txt                            evidencia_ps_sheel.txt          evidencias_grep_root_passwd.txt
+evidencia_diff_datos_nuevo.txt           evidencia_ps_sleep_antes.txt    lab-cli
+evidencia_group_ops.txt                  evidencia_ps_sleep_despues.txt  list_conf.txt
+evidencia_journal_logind_hoy_head50.txt  evidencia_shell_pid.txt         list_conf_head.txt
+evidencia_journal_logind_ultimos10.txt   evidencia_signal_check.txt      lista_conf_head.txt
+evidencia_mayus.txt                      evidencia_sleep_pid.txt         lista_tmp_txt_doc.txt
+evidencia_namei_[REDACTED]o.txt              evidencia_stat_[REDACTED]o.txt      nuevo.txt
+evidencia_nuevo_cat.txt                  evidencia_status_logind.txt     [REDACTED]o.txt
+evidencia_passwd_devsec.txt              evidencia_systemd_detect.txt
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ exit
+[?2004lexit
+
+Script done on 2025-09-01 22:52:16-05:00 [COMMAND_EXIT_CODE="0"]

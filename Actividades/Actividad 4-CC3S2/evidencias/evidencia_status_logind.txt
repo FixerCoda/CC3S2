@@ -1,0 +1,21 @@
+● systemd-logind.service - User Login Management
+     Loaded: loaded (/usr/lib/systemd/system/systemd-logind.service; static)
+    Drop-In: /usr/lib/systemd/system/systemd-logind.service.d
+             └─dbus.conf
+     Active: active (running) since Mon 2025-09-01 21:01:01 -05; 1h 20min ago
+       Docs: man:sd-login(3)
+             man:systemd-logind.service(8)
+             man:logind.conf(5)
+             man:org.freedesktop.login1(5)
+   Main PID: 151 (systemd-logind)
+     Status: "Processing requests..."
+      Tasks: 1 (limit: 9300)
+   FD Store: 0 (limit: 512)
+     Memory: 1.7M ()
+     CGroup: /system.slice/systemd-logind.service
+             └─151 /usr/lib/systemd/systemd-logind
+
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.

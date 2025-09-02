@@ -1,0 +1,4 @@
+fixerco+     290  0.0  0.0   6072  5240 pts/0    Ss   21:04   0:00 -bash
+fixerco+     359  0.0  0.0   6072  5272 pts/1    S+   21:04   0:00 -bash
+fixerco+     527  0.0  0.0   6204  5380 pts/2    Ss   21:47   0:00 bash -i
+fixerco+     697  0.0  0.0   4092  1924 pts/2    S+   22:10   0:00 grep --color=auto bash

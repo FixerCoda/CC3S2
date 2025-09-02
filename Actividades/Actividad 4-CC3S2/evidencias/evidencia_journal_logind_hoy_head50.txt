@@ -1,0 +1,13 @@
+Sep 01 08:04:31 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 08:04:32 RUBICK systemd-logind[163]: New seat seat0.
+Sep 01 08:04:32 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 08:04:34 RUBICK systemd-logind[163]: New session 1 of user fixercoda.
+Sep 01 14:49:33 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 14:49:33 RUBICK systemd-logind[159]: New seat seat0.
+Sep 01 14:49:33 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 14:49:35 RUBICK systemd-logind[159]: New session 10 of user fixercoda.
+-- Boot d5576abdf123491f8fd244d24e081f6b --
+Sep 01 21:01:01 RUBICK systemd[1]: Starting systemd-logind.service - User Login Management...
+Sep 01 21:01:01 RUBICK systemd-logind[151]: New seat seat0.
+Sep 01 21:01:01 RUBICK systemd[1]: Started systemd-logind.service - User Login Management.
+Sep 01 21:01:03 RUBICK systemd-logind[151]: New session 1 of user fixercoda.

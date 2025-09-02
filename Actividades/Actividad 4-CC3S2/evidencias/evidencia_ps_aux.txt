@@ -1,0 +1,44 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1  21684 13068 ?        Ss   21:04   0:00 /sbin/init
+root           2  0.0  0.0   2280  1300 ?        Sl   21:04   0:00 /init
+root           7  0.0  0.0   2296   132 ?        Sl   21:04   0:00 plan9 --control-socket 6 --log-level 4 --server-fd 7 --pipe-fd 9 --log-truncate
+root          49  0.0  0.2  66824 17636 ?        S<s  21:04   0:00 /usr/lib/systemd/systemd-journald
+root          94  0.0  0.0  23860  6096 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     106  0.0  0.1  21452 11848 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-resolved
+systemd+     107  0.0  0.0  91020  6592 ?        Ssl  21:04   0:00 /usr/lib/systemd/systemd-timesyncd
+root         142  0.0  0.0   4236  2604 ?        Ss   21:04   0:00 /usr/sbin/cron -f -P
+message+     143  0.0  0.0   9596  5076 ?        Ss   21:04   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         151  0.0  0.1  17976  8232 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd-logind
+root         154  0.0  0.2 1756096 16020 ?       Ssl  21:04   0:00 /usr/libexec/wsl-pro-service -vv
+root         159  0.0  0.0   3160  1140 hvc0     Ss+  21:04   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud - 115200,38400,9600 vt220
+root         165  0.0  0.0   3116  1108 tty1     Ss+  21:04   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         174  0.0  0.0  11548  1316 ?        Ss   21:04   0:00 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data     175  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     176  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     178  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+syslog       179  0.0  0.0 222508  5308 ?        Ssl  21:04   0:00 /usr/sbin/rsyslogd -n -iNONE
+www-data     180  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     183  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     185  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     186  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     187  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     188  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     189  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     190  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     191  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     193  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     195  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     196  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+www-data     198  0.0  0.0  13208  4492 ?        S    21:04   0:00 nginx: worker process
+root         205  0.0  0.2 107008 22448 ?        Ssl  21:04   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         288  0.0  0.0   2296   112 ?        Ss   21:04   0:00 /init
+root         289  0.0  0.0   2296   120 ?        S    21:04   0:00 /init
+fixerco+     290  0.0  0.0   6072  5240 pts/0    Ss   21:04   0:00 -bash
+root         291  0.0  0.0   6696  4596 pts/1    Ss   21:04   0:00 /bin/login -f
+fixerco+     343  0.0  0.1  20256 11528 ?        Ss   21:04   0:00 /usr/lib/systemd/systemd --user
+fixerco+     344  0.0  0.0  21144  1724 ?        S    21:04   0:00 (sd-pam)
+fixerco+     359  0.0  0.0   6072  5272 pts/1    S+   21:04   0:00 -bash
+fixerco+     526  0.0  0.0   3148  1188 pts/0    S+   21:46   0:00 script -q evidencias/sesion.txt
+fixerco+     527  0.0  0.0   6204  5380 pts/2    Ss   21:46   0:00 bash -i
+fixerco+     689  0.0  0.0   8284  4028 pts/2    R+   22:07   0:00 ps aux
+fixerco+     690  0.0  0.0   3136  1108 pts/2    S+   22:07   0:00 tee evidencia_ps_aux.txt

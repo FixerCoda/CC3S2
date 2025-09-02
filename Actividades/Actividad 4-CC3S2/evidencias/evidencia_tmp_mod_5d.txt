@@ -1,0 +1,3 @@
+/tmp/cli-ejemplo-1.txt
+/tmp/cli-ejemplo-2.doc
+/tmp/cli-ejemplo-3.txt

@@ -1,0 +1,7 @@
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls comandoinvalidaddo 2>> erorres.log || eores.log rerrores.log || true
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat errores.log
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ cat errores.logls comandoinvalido 2> errores.log || true[1@?[1@>[1@2
+[?2004l[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ ls comandoinvalido2 2>> errores.log || truecat errores.log
+[?2004h]0;fixercoda@RUBICK: ~fixercoda@RUBICK:~$ find .. -maxdepth 1 -name 'archivotail -n + 11 errores.log
+[?2004lCC3S2  conteo_tmp_txt_doc.txt  errores.log  etc_lista.txt  lab-cli  lista_tmp_txt_doc.txt  test.txt
+errores.log                              evidencia_ps_bg_despues.txt     evidencia_whoami.txt
