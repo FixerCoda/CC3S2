@@ -2,7 +2,7 @@
 
 -   Nombre: Diego Edson Bayes Santos
 -   Fecha: 08/09/2025
--   Tiempo total: 1.5h
+-   Tiempo total: 3.5h
 -   Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ### Sección 1 - CLI y Automatización
@@ -39,3 +39,5 @@
     -   **Cherry-pick:** Copia un commit específico a otra rama sin traer toda la historia.
 
 ### Sección 3 - Redes, HTTP/TLS y API
+
+-   La cabecera Content-Type contiene el tipo original de media (MIME) del recurso consultado. Estos pueden ser texto, videos, audios, imágenes, con sus respectivas extensiones.

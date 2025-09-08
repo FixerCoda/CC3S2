@@ -1,0 +1,5 @@
+Un flujo mínimo en DevOps busca garantizar que los cambios lleguen a producción de forma segura y repetible.
+1. Código: En esta etapa, se escriben nuevas funcionalidades o corrigen errores en un repositorio Git. El control de versiones permite gestionar ramas, revisiones y merges, asegurando trazabilidad y colaboración.
+2. Pruebas: Antes de integrar el código, se ejecuta un conjunto de pruebas automáticas (unitarias, de integración o estilo). Una herramienta común es pytest para Python, o Jest para JavaScript. Esto permite detectar fallos temprano y mantener calidad. Además, se pueden configurar “pipelines” en GitHub Actions o GitLab CI para ejecutar pruebas automáticamente en cada commit.
+3. Despliegue: Si las pruebas pasan, el código se empaqueta y se despliega en un entorno de producción. Aquí se utilizan herramientas de automatización como Docker (para empaquetar con dependencias) y Kubernetes (para orquestar). El despliegue es continuo (CD) para asegurar que cambios validados lleguen rápidamente a usuarios finales.
+Este flujo minimiza errores manuales y acelera la entrega, alineándose con buenas prácticas de DevOps.

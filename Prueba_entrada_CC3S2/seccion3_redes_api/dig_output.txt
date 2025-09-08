@@ -1,0 +1,6 @@
+google.com.		0	IN	A	172.217.192.138
+google.com.		0	IN	A	172.217.192.100
+google.com.		0	IN	A	172.217.192.113
+google.com.		0	IN	A	172.217.192.139
+google.com.		0	IN	A	172.217.192.101
+google.com.		0	IN	A	172.217.192.102

@@ -1,0 +1,9 @@
+GET y DNS:
+
+Para el uso de curl, el resultado es exitoso, por lo que almacena el contenido html en "example.html". Además, se modificó el uso de dig para solo extraer registros de tipo A, ya que el uso del modificador ANY está restringido por google.com y la solicitud no es atendida. El TTL igual a 0 implica que la respuesta no es almacenada en caché y se debe volver a resolver cada vez que sea consultada.
+
+Conceptos y pipeline:
+
+HTTP (Hypertext Transfer Protocol) es el protocolo de aplicación que permite la comunicación entre navegadores y servidores web, y el transporte de documentos, imágenes y APIs. Funciona bajo un modelo cliente-servidor, donde el cliente envía solicitudes (requests) y el servidor responde (responses) con código de estado y contenido. 
+El puerto 80 es el estándar para tráfico HTTP sin cifrado. Cuando se usa, la información viaja en texto claro: cualquiera que intercepte la conexión puede leer, modificar o inyectar datos. Esto plantea riesgos de privacidad y seguridad, como ataques de man-in-the-middle (MITM). 
+El puerto 443 está reservado para HTTPS, es decir HTTP con una capa de seguirdad en TLS (Transport Layer Security). TLS cifra el tráfico y asegura confidencialidad, integridad y autenticidad gracias a certificados digitales. El uso de TLS protege credenciales, cookies, APIs y datos sensibles en tránsito. Por eso, la mayoría de servicios modernos fuerzan el uso de HTTPS (443) como estándar seguro para la web.
