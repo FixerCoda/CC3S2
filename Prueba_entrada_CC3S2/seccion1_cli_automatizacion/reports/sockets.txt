@@ -1,0 +1,17 @@
+ss -tuln
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+udp   UNCONN 0      0         127.0.0.54:53         0.0.0.0:*          
+udp   UNCONN 0      0      127.0.0.53%lo:53         0.0.0.0:*          
+udp   UNCONN 0      0          127.0.0.1:323        0.0.0.0:*          
+udp   UNCONN 0      0              [::1]:323           [::]:*          
+tcp   LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*          
+tcp   LISTEN 0      511          0.0.0.0:80         0.0.0.0:*          
+tcp   LISTEN 0      511          0.0.0.0:443        0.0.0.0:*          
+tcp   LISTEN 0      511        127.0.0.1:40573      0.0.0.0:*          
+tcp   LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*          
+tcp   LISTEN 0      511             [::]:80            [::]:*          
+
+Riesgos: Puertos abiertos innecesarios pueden representar una vulnerabilidad en la seguridad, debido a que estos
+puertos pueden revelar información sensible del sistema que un atacante puede aprovechar. Se debe seguir una 
+aproximación similar al principio de "least privilege" y exponer solo los puertos que se necesiten y asignar 
+permisos de uso a únicamente los endpoints autorizados.
