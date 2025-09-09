@@ -1,0 +1,4 @@
+[main 74bce48] Revert "Commit erroneo"
+ 3 files changed, 11 deletions(-)
+ delete mode 100644 merge-o-conflicto.txt
+ delete mode 100644 revert.txt

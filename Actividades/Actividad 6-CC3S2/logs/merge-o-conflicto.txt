@@ -1,0 +1,11 @@
+Updating ad187d1..b85f48c
+Fast-forward
+ prueba.txt | Bin 0 -> 18 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 prueba.txt
+
+ Mensaje de conflicto:
+
+Auto-merging main.py
+CONFLICT (content): Merge conflict in main.py
+Automatic merge failed; fix conflicts and then commit the result.
