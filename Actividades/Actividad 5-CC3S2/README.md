@@ -1,17 +1,21 @@
 ## Actividad 5: Construyendo un pipeline DevOps con Make y Bash
 
 -   Nombre: Diego Edson Bayes Santos
--   Fecha: 14/09/2025
--   Tiempo total:
+-   Fecha: 15/09/2025
+-   Tiempo total: 2h
 -   Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ### Resumen del entorno
 
-### Parte 1: Construir - Makefile y Bash desde cero
+-   SO: Windows (version 10.0.26100.6584) con WSL (version 2.1.5.0)
+-   Ubuntu (WSL): Linux 5.15.146.1-microsoft-standard-WSL2 x86_64
+-   Bash: 5.2.21(1)-release (/usr/bin/bash)
+-   Make: GNU Make 4.3
+-   Python: Python 3.12.3
+-   Tar: tar (GNU tar) 1.35
+-   SHA256: sha256sum (GNU coreutils) 9.4
 
-<!-- Explica qué hace build y cómo $(PYTHON) $< > $@ usa $< y $@. -->
-<!-- Menciona el modo estricto (-e -u -o pipefail) y .DELETE_ON_ERROR. -->
-<!-- Diferencia entre la 1.ª y 2.ª corrida de build (idempotencia). -->
+### Parte 1: Construir - Makefile y Bash desde cero
 
 #### Crear un Makefile básico
 
@@ -137,22 +141,69 @@ echo $?
 
 ### Parte 2: Leer - Analizar un repositorio completo
 
-<!-- Qué observaste con make -n y make -d (decisiones de rehacer o no). -->
-<!-- Rol de .DEFAULT_GOAL, .PHONY y ayuda autodocumentada. -->
-
 #### Makefile completo (con reproducibilidad y utilidades)
 
 <!-- Ejecuta make -n all para un dry-run que muestre comandos sin ejecutarlos; identifica expansiones $@ y $<, el orden de objetivos y cómo all encadena tools, lint, build, test, package. -->
 
+-   El comando muestra la secuencia de ejecución sin realizarla: primero `tools` (verifica dependencias), luego `lint` (análisis estático), `build` (genera `out/hello.txt`), `test` (ejecuta pruebas) y finalmente `package` (crea el `tarball`). Las variables automáticas `$@` (target) y `$<` (primer prerrequisito) se expanden a sus rutas respectivas, por ejemplo, de `$(PYTHON) $< > $@` a `$(PYTHON) src/hello.py > out/hello.txt`.
+
 <!-- Ejecuta make -d build y localiza líneas "Considerando el archivo objetivo" y "Debe deshacerse", explica por qué recompila o no out/hello.txt usando marcas de tiempo y cómo mkdir -p $(@D) garantiza el directorio. -->
+
+-   Make compara las marcas de tiempo de `out/hello.txt` y `src/hello.py`. Si la fuente es más reciente, marca el target como "must remake" y recompila; de lo contrario, omite la acción. `mkdir -p $(@D)` asegura que el directorio `out/` exista antes de escribir el archivo, evitando errores de escritura.
+
 <!-- Fuerza un entorno con BSD tar en PATH y corre make tools; comprueba el fallo con "Se requiere GNU tar" y razona por qué --sort, --numeric-owner y --mtime son imprescindibles para reproducibilidad determinista. -->
+
+-   Al forzar BSD tar, `make tools` falla porque GNU tar es esencial para opciones como `--sort=name` (orden consistente de archivos), `--numeric-owner` (UIDs/GIDs numéricos) y `--mtime` (timestamp fijo). Estas opciones eliminan variabilidad y garantizan que el tarball sea idéntico en cada build.
+
+```
+PATH="/tmp/fake-bin/:$PATH" make tools
+>> Se requiere GNU tar
+>> make: *** [Makefile:50: tools] Error 1
+```
+
 <!-- Ejecuta make verify-repro; observa que genera dos artefactos y compara SHA256_1 y SHA256_2. Si difieren, hipótesis: zona horaria, versión de tar, contenido no determinista o variables de entorno no fijadas. -->
+
+-   Genera dos tarballs independientes y compara sus hashes `SHA256`. Dado que se excluyeron posibles causas como la zona horaria no UTC, metadatos de archivos no normalizados, o herramientas no deterministas. El target asegura que el entorno esté limpio antes de cada build para evitar contaminación.
+
+```
+make verify-repro
+>> SHA256_1=ad917bfc2c042f07c8de4ef70fcbff91a49977d589de88932da474592ba1c545
+>> SHA256_2=ad917bfc2c042f07c8de4ef70fcbff91a49977d589de88932da474592ba1c545
+>> OK: reproducible
+```
+
 <!-- Corre make clean && make all, cronometrando; repite make all sin cambios y compara tiempos y logs. Explica por qué la segunda es más rápida gracias a timestamps y relaciones de dependencia bien declaradas. -->
+
+-   La primera ejecución (`make all`) construye todo desde cero. La segunda es más rápida porque make verifica que los timestamps de los targets sean más recientes que los de sus dependencias y omite regenerarlos. Esto demuestra la optimización mediante el grafo de dependencias.
+
+```
+make clean
+time make all 2>&1
+>> real    0m0.284s
+
+time make all 2>&1
+>> real    0m0.201s
+```
+
 <!-- Ejecuta PYTHON=python3.12 make test (si existe). Verifica con python3.12 --version y mensajes que el override funciona gracias a ?= y a PY="${PYTHON:-python3}" en el script; confirma que el artefacto final no cambia respecto al intérprete por defecto. -->
+
+-   El override funciona gracias a `?=` en el Makefile (asigna solo si no está definida) y a `PY="${PYTHON:-python3}"` en el script, que usa la variable correcta. El artefacto final no cambia porque el contenido de `hello.txt` es idéntico independientemente del intérprete.
+
 <!-- Ejecuta make test; describe cómo primero corre scripts/run_tests.sh y luego python -m unittest. Determina el comportamiento si el script de pruebas falla y cómo se propaga el error a la tarea global. -->
+
+-   El orden de ejecución está dictado por su definición en el Makefile. Si el script falla, termina con código de error y `make` aborta, propagando el fallo al target `test` y deteniendo la ejecución de targets dependientes.
+
 <!-- Ejecuta touch src/hello.py y luego make all; identifica qué objetivos se rehacen (build, test, package) y relaciona el comportamiento con el timestamp actualizado y la cadena de dependencias especificada. -->
+
+-   `touch src/hello.py` actualiza su marca de tiempo. Al correr `make all`, los targets `build`, `test` y `package` se rehacen porque dependen del archivo modificado. Esto refleja la cascada de dependencias definidas en el Makefile.
+
 <!-- Ejecuta make -j4 all y observa ejecución concurrente de objetivos independientes; confirma resultados idénticos a modo secuencial y explica cómo mkdir -p $(@D) y dependencias precisas evitan condiciones de carrera. -->
+
+-   Los targets independientes (como `lint` y `tools`) se ejecutan en paralelo. `mkdir -p $(@D)` es seguro en concurrencia porque crea directorios de forma idempotente. Las dependencias precisas evitan condiciones de carrera, asegurando que los targets se construyan en el orden correcto.
+
 <!-- Ejecuta make lint y luego make format; interpreta diagnósticos de shellcheck, revisa diferencias aplicadas por shfmt y, si está disponible, considera la salida de ruff sobre src/ antes de empaquetar. -->
+
+-   El target `make lint` ejecuta `shellcheck` (análisis de bugs en Bash) y `shfmt` (verificación de formato). Además, con `make format`, se aplica el formateo automático con `shfmt -w`. Por último, `ruff` analiza el código Python, asegurando calidad antes del empaquetado.
 
 ### Parte 3: Extender
 
@@ -161,5 +212,14 @@ echo $?
 <!-- Reproducibilidad: factores que la garantizan (--sort, --mtime, --numeric-owner, TZ=UTC) y el resultado de verify-repro. -->
 
 ### Incidencias y mitigaciones
+
+-   En el último inciso de la primera parte, la ejecución no se dio como lo esperado debido a que la ejecución de los comandos se realizó en un subshell (dentro del condicional), por lo que no se interrumpió el error incluso con el uso de `set -u pipefail`. Para solucionar esto, se introdujo una verificación redundante y previa al condicional que detiene el flujo dentro del shell principal y resulta en el código de salida 1, como se planeó para el ejercicio.
+
+```
+    local output
+	("$PY" "$script")
+    echo "$output"
+	if ! echo "$output" | grep -Fq "Hello, World!"; then
+```
 
 ### Conclusión operativa
