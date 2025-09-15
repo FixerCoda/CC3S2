@@ -2,7 +2,7 @@
 
 -   Nombre: Diego Edson Bayes Santos
 -   Fecha: 15/09/2025
--   Tiempo total: 2h
+-   Tiempo total: 4h
 -   Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ### Resumen del entorno
@@ -208,8 +208,16 @@ time make all 2>&1
 ### Parte 3: Extender
 
 <!-- Qué detectó shellcheck/shfmt (o evidencia de que no están instalados). -->
+
+-   La herramienta `shellCheck` detectó un error de quoting (`SC2283`) al usar espacios adicionales alrededor de una asignación. Además, `shfmt` aplicó formato consistente (indentación de 2 espacios, alineación).
+
 <!-- Demostración de rollback con trap (códigos de salida y restauración). -->
+
+-   Al ejecutarse un error, el script lo detecta y lo interrumpe (`exit 2`), ejecuta el trap y restaura `hello.py` desde `.bak`. El `cleanup` preserva el código de salida original (2) y garantiza que no queden artefactos parciales, demostrando robustez ante fallos inesperados.
+
 <!-- Reproducibilidad: factores que la garantizan (--sort, --mtime, --numeric-owner, TZ=UTC) y el resultado de verify-repro. -->
+
+-   El primer `make benchmark` construye todo (≈0.20s). El segundo es ligeramente más rápido (≈0.18s) gracias a la caché de `make`. Tras `touch src/hello.py`, se rehacen `build`, `test` y `package`, demostrando que el grafo de dependencias reconstruye solo lo necesario basado en marcas de tiempo.
 
 ### Incidencias y mitigaciones
 
@@ -223,3 +231,5 @@ time make all 2>&1
 ```
 
 ### Conclusión operativa
+
+Este pipeline de CI/CD es robusto por su estricto control de errores (`set -euo pipefail`, `.DELETE_ON_ERROR`) y `builds` deterministas (reproducibilidad con GNU tar). Su diseño incremental optimiza tiempos y recursos, mientras las validaciones de `lint`, `tests` y `rollback` automático garantizan entregas consistentes y confiables.
