@@ -1,0 +1,6 @@
+  all           Construir, testear y empaquetar todo
+  build         Generar out/hello.txt
+  clean         Limpiar archivos generados
+  help          Mostrar ayuda
+6:.DEFAULT_GOAL := help
+11:.PHONY: all build test package clean help lint tools check benchmark format dist-clean verify-repro

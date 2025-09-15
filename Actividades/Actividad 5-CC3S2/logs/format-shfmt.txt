@@ -1,0 +1,29 @@
+--- scripts/run_tests.sh.orig
++++ scripts/run_tests.sh
+@@ -10,19 +10,19 @@
+ PY = "${PYTHON:-python3}"
+ 
+ # Directorio de código fuente
+-    SRC_DIR="src"
++SRC_DIR="src"
+ 
+ # Archivo temporal
+ tmp="$(mktemp)"
+ 
+ # Limpieza segura + posible rollback de hello.py si existiera un .bak
+ cleanup() {
+-rc="$1"
+-rm -f "$tmp"
+-if [ -f "${SRC_DIR}/hello.py.bak" ]; then
+-    mv -- "${SRC_DIR}/hello.py.bak" "${SRC_DIR}/hello.py"
+-fi
+-exit "$rc"
++	rc="$1"
++	rm -f "$tmp"
++	if [ -f "${SRC_DIR}/hello.py.bak" ]; then
++		mv -- "${SRC_DIR}/hello.py.bak" "${SRC_DIR}/hello.py"
++	fi
++	exit "$rc"
+ }
+ trap 'cleanup $?' EXIT INT TERM
+ 
