@@ -2,7 +2,7 @@
 
 -   Nombre: Diego Edson Bayes Santos
 -   Fecha: 08/09/2025
--   Tiempo total:
+-   Tiempo total: 3h
 -   Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ### Ejercicios guiados
@@ -45,16 +45,18 @@ Se usa `git revert` cuando se necesita deshacer commits en historial público co
 
 ### Variantes útiles para DevOps/DevSecOps
 
-#### A) Fast-Forward Only (merge seguro)
+#### Fast-Forward Only (merge seguro)
 
-#### B) Rebase + FF (historial lineal con PRs)
+```
+fatal: Not possible to fast-forward, aborting.
+```
 
-#### C) Merge con validación previa (sin commitear)
+#### Merge con validación previa (sin commitear)
 
-#### D) Octopus Merge (varias ramas a la vez)
+```
+Automatic merge went well; stopped before committing as requested
+```
 
-#### E) Subtree (integrar subproyecto conservando historial)
+#### Sesgos de resolución y normalización (algoritmo ORT)
 
-#### F) Sesgos de resolución y normalización (algoritmo ORT)
-
-#### G) Firmar merges/commits (auditoría y cumplimiento)
+Se escogió `-X ours` al considerarse un cambio menor en el cual se da prioridad a la rama principal. Sin embargo, cada situación debe considerarse meticulosamente para no suprimir algún avance importante.
