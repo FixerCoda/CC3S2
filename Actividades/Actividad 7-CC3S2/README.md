@@ -41,6 +41,8 @@ En el caso de `fast-forward`, se observa un DAG simple y linear, en el cual no e
 
 ### Revertir una fusión (solo si HEAD es un merge commit)
 
+Se usa `git revert` cuando se necesita deshacer commits en historial público compartido, ya que crea nuevos commits que revierten cambios sin reescribir historial, evitando conflictos con otros colaboradores. Por otra parte, `git reset` reescribe commits y puede causar conflictos en repos remotos si el historial ya fue publicado. Entonces, `git revert` es más seguro para trabajo colaborativo porque preserva el historial existente y permite un deshacer no destructivo.
+
 ### Variantes útiles para DevOps/DevSecOps
 
 #### A) Fast-Forward Only (merge seguro)
