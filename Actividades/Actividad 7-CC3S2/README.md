@@ -21,6 +21,8 @@ Un _merge squash_ es conveniente para casos de _merges_ excesivos y poco signifi
 
 ### Conflictos reales con no-fast-forward
 
+Para resolver conflictos, se debe usar `git diff` para identificarlos y corregir manualmente según la funcionalidad resultante deseada. En este caso, VS Code con la extensión de Git, te permite visualizar estos conflictos en una interfaz especial para definir qué cambios son los finales. Para evitar este tipo de situaciones, se recomienda atomizar las modificaciones en PRs más pequeñas. De esta manera, cada desarrollador coordina con el equipo para determinar su trabajo actual y paralelizar las responsabilidades en cada entrega, para reducir al máximo el solapamiento (por ejemplo, modificar la misma función en 2 ramas concurrentes).
+
 ### Comparar historiales tras cada método
 
 ### Revertir una fusión (solo si HEAD es un merge commit)
