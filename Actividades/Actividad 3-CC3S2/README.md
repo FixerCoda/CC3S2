@@ -1,7 +1,7 @@
 ## Actividad 3: Integración de DevOps y DevSecOps con HTTP, DNS, TLS y 12-Factor App
 
 -   Nombre: Diego Edson Bayes Santos
--   Fecha: 15/09/2025
+-   Fecha: 29/09/2025
 -   Tiempo total:
 -   Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
@@ -45,6 +45,29 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 #### Automatización reproducible con Make y Bash (Automation en CALMS)
 
 <!-- Ejecuta Makefile para preparar, hosts-setup y correr la app. Agrega un target para verificar idempotencia HTTP (reintentos con curl). Explica cómo Lean minimiza fallos. Haz una tabla de rastreo de objetivos con esta cabeceras, "objetivo -> prepara/verifica -> evidencia" de Instrucciones.md. -->
+
+-   El principo Lean minimiza los fallos a través del Makefile gracias a la automatización de procesos. El pipeline se ejecuta de manera automática en recetas reproducibles desde distintos entornos, lo que evita posibles errores manuales. Además, el Makefile cuenta con herramientas importantes que eliminan repeticiones innecesarias y optimiza los recursos.
+
+| Objetivo (Make)         | Prepara / Verifica                                                                 | Evidencia (captura o salida)                                                                            |
+| ----------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `make help`             | Muestra los targets con una breve descripción                                      | Captura de consola con la lista de targets                                                              |
+| `make debug-venv`       | Diagnostica las rutas que usa el Makefile para su corroboración                    | Captura de consola con la salida de la información                                                      |
+| `make prepare`          | Crea el entorno e instala dependencias necesarias para la app                      | Captura de consola con la instalación                                                                   |
+| `make venv-recreate`    | Recrea el entorno desde cero                                                       | Captura de consola con la recreación                                                                    |
+| `make shell`            | Abre un terminal con el entorno activado                                           | Terminal nuevo con el entorno bdd                                                                       |
+| `make run`              | Levanta la aplicación Flask en el puerto configurado                               | Levantamiento del app en `http://localhost:8080/`                                                       |
+| `make check-http`       | Verifica los puertos, sockets y HTTP para su uso                                   | Captura de consola que muestra la respuesta HTTP esperada, el socket en modo LISTEN y el puerto abierto |
+| `make hosts-setup`      | Configura resolución local para el dominio de la app                               | Captura de consola con la salida de `ping miapp.local` resolviendo a la IP correcta                     |
+| `make resolv-show`      | Muestra los archivos `resolv.conf` y la presencia de `miapp.local` en `/etc/hosts` | Captura de la consola con el contenido del archivo y la búsqueda                                        |
+| `make dns-demo`         | Demuestra el uso de la herramienta `dig` para consultas DNS                        | Captura de consola con todos los resultados de las consultas                                            |
+| `make curl-http-local`  | Prueba HTTP (puerto 80)                                                            | Captura de consola con la respuesta definida                                                            |
+| `make curl-https-local` | Prueba HTTP (puerto 443)                                                           | Captura de consola con la respuesta definida                                                            |
+| `make tls-cert`         | Genera los certificados TLS                                                        | Captura de los certificados creado en el directorio `certs`                                             |
+| `make nginx`            | Instala Nginx y lo recarga                                                         | Levantamiento del app en `https://miapp.local`                                                          |
+| `make ufw-open`         | Abre los puertos 80 y 443 en UFW                                                   | Salida de los comandos exitosos                                                                         |
+| `make check-tls`        | Valida `handshake` TLS y las cabeceras                                             | Mensajes de confirmación `CONNECTION ESTABLISHED`, respuesta y encabezados HTTP esperados               |
+| `make cleanup`          | Elimina archivos temporales y detiene servicios                                    | Captura de consola con la limpieza de archivos                                                          |
+| `make idempotency-http` | Comprueba la idempotencia del método GET                                           | Captura de consola con la salida esperada de 3 respuestas iguales                                       |
 
 #### Del código a producción con 12-Factor (Build/Release/Run)
 
