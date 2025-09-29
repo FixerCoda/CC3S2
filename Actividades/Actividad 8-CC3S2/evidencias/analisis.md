@@ -55,3 +55,15 @@ Los marcadores `smoke` sirven para pruebas iniciales y rápidas que verifican el
 
 -   Esperado: add_item debería sumar cantidades y mantener precios
 -   Actual: add_item sobrescribe completamente el precio unitario anterior
+
+### D2. Invariantes de inventario
+
+El invariante garantiza que sin importar el camino tomado (remover N o actualizar a 0), el sistema llega al mismo estado consistente. Este test valida que múltiples operaciones lleven al mismo estado final, detectando:
+
+-   Inconsistencias en la lógica de remoción: Si remover_producto no elimina completamente o deja residuos
+-   Problemas en actualización de cantidades: Si actualizar_cantidad(0) no limpia correctamente el carrito
+-   Efectos secundarios no deseados: Cambios en una operación que rompen la equivalencia con la otra
+
+### D3. Contrato de mensajes de error
+
+El mensaje de excepción debe contener información importante para arreglar el error tales como el nombre y precio del producto que causó el error. De esta manera, permite un contexto accionable que facilita el `debug` al equipo. Para esta prueba, se comprueba que el nombre no se encuentra en el mensaje de excepción.
