@@ -27,3 +27,31 @@ El uso de `skip` permite mapear posibles errores o fallos que no vayan a ser ate
 ### B3. Refactor de suites
 
 Los casos que incluyan una misma situación específica y requieran recursos similares, tales como los referentes a la pasarela de pago, pueden ser definidos dentro de una clase con varias pruebas. De esta manera, se evita la duplicación de lógica y se aprovecha la reutilización de recursos con métodos que aporta `pytest`.
+
+### C1. Contratos de pasarela de pago con mock
+
+| Evento                  | Expectativa                   |
+| ----------------------- | ----------------------------- |
+| Pago exitoso            | True                          |
+| Excepción sin reintento | TimeoutError, call_count == 1 |
+| Pago fallido            | False                         |
+
+### C2. Marcadores de humo y regresión
+
+Los marcadores `smoke` sirven para pruebas iniciales y rápidas que verifican el funcionamiento básico del software. Son un punto importante de partida durante el CI porque permite aterrizar las pruebas más críticas y construir el resto a partir de estas. Asimismo, los marcadores `regression` sirven para verificar que un cambio reciente de código no impacte funcionalidad existente, lo que apoya a los cambios ágiles y robustos.
+
+### C4. MREs para defectos
+
+**Problema:** Error de precisión al agregar múltiples items del mismo producto
+
+**Pasos para reproducir:**
+
+-   Crear carrito y agregar producto `x` con precio 0.1
+-   Agregar el mismo producto `x` con precio 0.2
+-   Calcular total esperando 0.30 (0.1 + 0.2)
+-   El total real es 0.20 (último precio sobrescribe el anterior)
+
+**Expectativa vs Realidad:**
+
+-   Esperado: add_item debería sumar cantidades y mantener precios
+-   Actual: add_item sobrescribe completamente el precio unitario anterior

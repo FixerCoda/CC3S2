@@ -19,7 +19,7 @@ test:
 	@$(PYTEST)
 
 cov:
-	@$(PYTHON) -m pytest --cov=. --cov-report=term-missing -c pytest.ini
+	@$(PYTHON) -m pytest -q --cov=src --cov-report=term-missing --cov-fail-under=90 -c pytest.ini
 
 lint:
 	@$(PYLINT) $(PYLINT_FLAGS) src tests
