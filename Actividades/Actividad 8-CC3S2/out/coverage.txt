@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/fixercoda/CC3S2/labs/Laboratorio3
+configfile: pytest.ini
+testpaths: tests
+plugins: cov-5.0.0, Faker-37.8.0
+collected 46 items
+
+tests/test_carrito.py .........                                          [ 19%]
+tests/test_descuentos_parametrizados.py ......                           [ 32%]
+tests/test_estabilidad_semillas.py .                                     [ 34%]
+tests/test_idempotencia_cantidades.py .                                  [ 36%]
+tests/test_invariantes_inventario.py .                                   [ 39%]
+tests/test_markers.py ......                                             [ 52%]
+tests/test_mensajes_error.py x                                           [ 54%]
+tests/test_pasarela_pago_contratos.py ...                                [ 60%]
+tests/test_precios_frontera.py ....XX                                    [ 73%]
+tests/test_redondeo_acumulado.py .                                       [ 76%]
+tests/test_refactor_suites.py ...                                        [ 82%]
+tests/test_rgr_precision_rojo.py x                                       [ 84%]
+tests/test_rgr_precision_verde.py s                                      [ 86%]
+tests/test_shopping_cart.py ......                                       [100%]
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                   Stmts   Miss  Cover   Missing
+----------------------------------------------------
+src/__init__.py            0      0   100%
+src/carrito.py            55      5    91%   9, 21, 50, 52, 60
+src/factories.py           7      0   100%
+src/shopping_cart.py      29      2    93%   27, 31
+----------------------------------------------------
+TOTAL                     91      7    92%
+
+
+============= 41 passed, 1 skipped, 2 xfailed, 2 xpassed in 0.20s ==============
