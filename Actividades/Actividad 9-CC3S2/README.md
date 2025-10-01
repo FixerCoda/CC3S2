@@ -7,18 +7,6 @@
 
 ### Aserciones Pruebas
 
-Se escribió 1 prueba para cada uno de los 4 métodos de `stack.py`:
-
--   `is_empty()`
-
--   `pop()`
-
--   `peek()`
-
--   `push(data)`
-
-El reporte del coverage muestra que se cubrió el 100% del código.
-
 ### Pruebas Pytest
 
 ### Pruebas Fixtures
