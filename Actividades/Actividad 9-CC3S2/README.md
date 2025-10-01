@@ -21,6 +21,10 @@ El reporte del coverage muestra que se cubrió el 100% del código.
 
 ### Pruebas Pytest
 
+Las pruebas de `pytest` en esta actividad cubren casos para distintos tipos de inputs (como `int` o `float`), casos frontera (como lados que miden 0 o negativo) y que activen los errores esperados.
+
+El reporte del coverage muestra que se cubrió el 100% del código.
+
 ### Pruebas Fixtures
 
 ### Coverage Pruebas
