@@ -49,6 +49,8 @@ El reporte del coverage muestra que se cubrió el 100% del código.
 
 ### Factories Fakes
 
+Se mejoró el caso de `fixtures` con el uso de `factories` para reemplazar los datos fabricados manualmente de cuentas en un archivo `json`.
+
 ### Mocking Objetos
 
 ### Practica TDD
