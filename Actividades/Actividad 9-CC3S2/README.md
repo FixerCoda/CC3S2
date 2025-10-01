@@ -7,6 +7,18 @@
 
 ### Aserciones Pruebas
 
+Se escribió 1 prueba para cada uno de los 4 métodos de `stack.py`:
+
+-   `is_empty()`
+
+-   `pop()`
+
+-   `peek()`
+
+-   `push(data)`
+
+El reporte del coverage muestra que se cubrió el 100% del código.
+
 ### Pruebas Pytest
 
 Las pruebas de `pytest` en esta actividad cubren casos para distintos tipos de inputs (como `int` o `float`), casos frontera (como lados que miden 0 o negativo) y que activen los errores esperados.
