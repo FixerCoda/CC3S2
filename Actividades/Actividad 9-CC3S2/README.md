@@ -10,11 +10,8 @@
 Se escribió 1 prueba para cada uno de los 4 métodos de `stack.py`:
 
 -   `is_empty()`
-
 -   `pop()`
-
 -   `peek()`
-
 -   `push(data)`
 
 El reporte del coverage muestra que se cubrió el 100% del código.
@@ -30,22 +27,22 @@ El reporte del coverage muestra que se cubrió el 100% del código.
 Se implementaron 7 nuevas pruebas para alcanzar la cobertura completa:
 
 -   Representación de la cuenta en `str`
-
 -   Serialización de una cuenta en un diccionario
-
 -   Establecimiento de atributos de una cuenta desde un diccionario
-
 -   Actualización de una columna de una cuenta
-
 -   Validación de error en la actualización de un id de cuenta inexistente
-
 -   Búsqueda de una cuenta con su id
-
 -   Eliminación de una cuenta
 
 El reporte del coverage muestra que se cubrió el 100% del código.
 
 ### Coverage Pruebas
+
+Se expandió la suite de pruebas para la validación de información de una cuenta:
+
+-   Validación del nombre de una cuenta
+-   Validación del correo de una cuenta
+-   Salida exitosa tras pasar validación
 
 ### Factories Fakes
 
@@ -60,9 +57,6 @@ Se comenzó refactorizando el código existente para mejorar el funcionamiento. 
 Se implementaron 4 nuevas pruebas:
 
 -   Incrementar un contador en 1
-
 -   Establecer valor específico
-
 -   Listar todos los contadores
-
 -   Reiniciar un contador

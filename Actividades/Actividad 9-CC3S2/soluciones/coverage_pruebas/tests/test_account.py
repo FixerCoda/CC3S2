@@ -164,3 +164,24 @@ class TestAccountModel:
         representation = repr(account)
         expected = f"<Account '{data['name']}'>"
         assert representation == expected
+
+    def test_valid_account(self):
+        data = ACCOUNT_DATA[0]
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.validate()
+        assert True
+
+    def test_validate_name(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.name = ""
+        with pytest.raises(DataValidationError, match="El nombre no puede estar vacío"):
+            account.validate()
+
+    def test_validate_email(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.email = "email_invalido"
+        with pytest.raises(DataValidationError, match="El email no es válido"):
+            account.validate()
