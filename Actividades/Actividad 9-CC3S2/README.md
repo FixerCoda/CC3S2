@@ -27,6 +27,24 @@ El reporte del coverage muestra que se cubrió el 100% del código.
 
 ### Pruebas Fixtures
 
+Se implementaron 7 nuevas pruebas para alcanzar la cobertura completa:
+
+-   Representación de la cuenta en `str`
+
+-   Serialización de una cuenta en un diccionario
+
+-   Establecimiento de atributos de una cuenta desde un diccionario
+
+-   Actualización de una columna de una cuenta
+
+-   Validación de error en la actualización de un id de cuenta inexistente
+
+-   Búsqueda de una cuenta con su id
+
+-   Eliminación de una cuenta
+
+El reporte del coverage muestra que se cubrió el 100% del código.
+
 ### Coverage Pruebas
 
 ### Factories Fakes

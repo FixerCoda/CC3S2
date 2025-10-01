@@ -47,6 +47,44 @@ class TestAccountModel:
         db.session.remove()
 
     #  Casos de prueba
+    def test_account_representation(self):
+        """Probar la representación del nombre de una cuenta"""
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.create()
+        assert str(account) == f"<Account '{data['name']}'>"
+
+    def test_serialization_to_dict(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.create()
+        account_dict = account.to_dict()
+        assert all(
+            [
+                key in account_dict and data[key] == account_dict[key]
+                for key in data.keys()
+            ]
+        )
+
+    def test_assignment_from_dict(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.create()
+        new_data = {
+            "name": "Amber Torres",
+            "email": "reedjoann@example.org",
+            "phone_number": "121.566.9078",
+            "disabled": True,
+        }
+        account.from_dict(new_data)
+        account_dict = account.to_dict()
+        assert all(
+            [
+                key in account_dict and new_data[key] == account_dict[key]
+                for key in new_data.keys()
+            ]
+        )
+
     def test_create_an_account(self):
         """Probar la creación de una sola cuenta"""
         data = ACCOUNT_DATA[0]  # obtener la primera cuenta
@@ -60,3 +98,36 @@ class TestAccountModel:
             account = Account(**data)
             account.create()
         assert len(Account.all()) == len(ACCOUNT_DATA)
+
+    def test_update_an_account(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.create()
+        account.id = 2
+        account.update()
+        assert account.to_dict()["id"] == 2
+
+    def test_update_an_account_without_id(self):
+        data = ACCOUNT_DATA[0]
+        account = Account(**data)
+        account.create()
+        account.id = None
+        with pytest.raises(Exception, match="Se llamó a update sin un ID"):
+            account.update()
+
+    def test_find_account(self):
+        accounts = []
+        for data in ACCOUNT_DATA:
+            account = Account(**data)
+            account.create()
+            accounts.append(account)
+
+        account_found = Account.find(1)
+        assert accounts[0].id == account_found.id
+
+    def test_delete_account(self):
+        data = ACCOUNT_DATA[0]  # obtener la primera cuenta
+        account = Account(**data)
+        account.create()
+        account.delete()
+        assert len(Account.all()) == 0
