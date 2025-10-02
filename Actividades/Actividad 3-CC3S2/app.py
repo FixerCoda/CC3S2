@@ -20,6 +20,25 @@ def root():
         port=PORT,
     )
 
+@app.after_request
+def add_etag(resp):
+    # Sólo como demo: Flask puede gestionar ETag automáticamente si set_etag
+    if resp.direct_passthrough or resp.status_code != 200:
+        return resp
+    body = resp.get_data(as_text=True)
+    import hashlib
+    etag = hashlib.sha256(body.encode("utf-8")).hexdigest()[:16]
+    resp.set_etag(etag)
+    return resp
+
+@app.route("/health")   # liveness: el proceso está vivo
+def healthz():
+    return jsonify(status="ok")
+
+@app.route("/ready")    # readiness: listo para tráfico
+def readyz():
+    return jsonify(ready=True)
+
 if __name__ == "__main__":
     # 12-Factor: vincular a un puerto; proceso único; sin estado
     app.run(host="127.0.0.1", port=PORT)

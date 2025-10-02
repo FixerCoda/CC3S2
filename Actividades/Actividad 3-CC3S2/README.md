@@ -78,7 +78,7 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
     ![Cambio Variables Entorno](./capturas/variables-entorno-cambio.png)
     ![Salida Variables Entorno](./capturas/variables-entorno-salida.png)
 
-- Se verifica la paridad de los artefactos usando `git archive` mediante la verificación de *hashes* con diferentes variables de entorno.
+- Se verifica la paridad de los artefactos usando `git archive` mediante la verificación de _hashes_ con diferentes variables de entorno.
 
     ![Artefacto Preparación](./capturas/artefacto-git-archive.png)
     ![Artefacto Comparación](./capturas/artefacto-paridad.png)
@@ -100,6 +100,53 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 ### HTTP como contrato observable
 
 <!-- Inspecciona cabeceras como ETag o HSTS. Define qué operaciones son seguras para reintentos. Implementa readiness y liveness simples, y mide latencias con curl. Documenta contrato mínimo (campos respuesta, trazabilidad en logs). Explica cómo definirías un SLO. -->
+
+- Se añadió la cabecera _ETag_ a la aplicación y se inspeccionó el resultado nuevo.
+
+    ![ETag Header](./capturas/header_etag.png)
+
+- En HTTP, un método idempotente es aquel que produce la misma salida para una misma entrada, lo que lo convierte en un método seguro para reintentos. Con métodos como GET, PUT, OPTIONS o HEAD, se obtiene el mismo resultado para _requests_ idénticos. Además, el método DELETE remueve un recurso y en reintentos posteriores recibe estados de "no encontrado", por lo que también no genera cambios adicionales y se considera idempotente. Es importante que el endpoint principal pueda ser inspeccionado de manera idempotente para evitar modificaciones silenciosas y que afecten la funcionalidad requerida.
+
+- Se implementaron endpoints mínimos de salud (_health_) y preparación lista (_ready_) para verificar el estado de la aplicación y que sirvan como puntos de inspección. Además, se pueden medir las latencias con la herramienta `curl`.
+
+    ![Salud y Preparación](./capturas/health-and-readiness.png)
+    ![Latencia](./capturas/curl-latencia.png)
+
+- Contrato de salida:
+  
+  - Endpoints de respuesta
+    - `GET /`
+    Propósito: Endpoint principal de la aplicación
+
+    ```json
+    {"message":"Hola","port":8080,"release":"v0","status":"ok"}
+    ```
+
+    - `GET /health`
+    Propósito: Health check de liveness (proceso vivo)
+
+    ```json
+    {"status": "ok"}
+    ```
+
+    - `GET /ready`
+    Propósito: Health check de readiness (listo para tráfico)
+
+    ```json
+    {"ready": true}
+    ```
+
+  - Trazabilidad en Logs
+
+    ```python
+    print(f"[INFO] GET /  message={MESSAGE} release={RELEASE}", file=sys.stdout, flush=True)
+    ```
+
+- Definición de un SLO:
+  - Latencia
+    - Objetivo: 95% de requests < 10ms
+    - Percentil: p95 response time
+    - Endpoint: Principal (GET /)
 
 ### DNS y caché en operación
 
