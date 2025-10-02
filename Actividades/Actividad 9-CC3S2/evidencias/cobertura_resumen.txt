@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.3, pluggy-1.6.0
+rootdir: ~/Actividades/coverage_pruebas
+plugins: cov-5.0.0, Faker-37.8.0
+collected 13 items
+
+tests/test_account.py .............                                      [100%]
+
+---------- coverage: platform linux, python 3.12.3-final-0 -----------
+Name                Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------
+models/account.py      53      0     14      0   100%
+---------------------------------------------------------------
+TOTAL                  53      0     14      0   100%
+
+
+============================== 13 passed in 0.73s ==============================

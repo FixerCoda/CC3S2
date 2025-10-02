@@ -1,0 +1,25 @@
+Script started on 2025-10-01 19:27:22-05:00 [COMMAND="make test_all" TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="122" LINES="9"]
+Ejecutando pruebas en TODAS las actividades...
+EJECUTANDO PRUEBAS EN aserciones_pruebas
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                               [100%][0m
+[32m[32m[1m4 passed[0m[32m in 0.02s[0m[0m
+EJECUTANDO PRUEBAS EN coverage_pruebas
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                      [100%][0m
+[32m[32m[1m13 passed[0m[32m in 0.35s[0m[0m
+EJECUTANDO PRUEBAS EN factories_fakes
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                          [100%][0m
+[32m[32m[1m9 passed[0m[32m in 0.41s[0m[0m
+EJECUTANDO PRUEBAS EN mocking_objetos
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                           [100%][0m
+[32m[32m[1m8 passed[0m[32m in 0.10s[0m[0m
+EJECUTANDO PRUEBAS EN practica_tdd
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                          [100%][0m
+[32m[32m[1m9 passed[0m[32m in 0.13s[0m[0m
+EJECUTANDO PRUEBAS EN pruebas_fixtures
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                          [100%][0m
+[32m[32m[1m9 passed[0m[32m in 0.40s[0m[0m
+EJECUTANDO PRUEBAS EN pruebas_pytest
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                                                        [100%][0m
+[32m[32m[1m11 passed[0m[32m in 0.04s[0m[0m
+
+Script done on 2025-10-01 19:27:29-05:00 [COMMAND_EXIT_CODE="0"]
