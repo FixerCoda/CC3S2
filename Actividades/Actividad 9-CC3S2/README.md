@@ -50,6 +50,13 @@ Se mejoró el caso de `fixtures` con el uso de `factories` para reemplazar los d
 
 ### Mocking Objetos
 
+Se emplearon `mocks` para replicar respuestas de IMDb sin necesidad de acceder a la API, lo que reduce las dependencias en la fase de pruebas sin reducir efectividad.
+
+Se implementaron las pruebas faltantes para la cobertura completa:
+
+-   Reviews de películas no encontradas
+-   Ratings de películas no encontradas
+
 ### Practica TDD
 
 Se comenzó refactorizando el código existente para mejorar el funcionamiento. El principal cambio fue la implementación del decorador `require_counter`, el cual corrobora la existencia de un contador como precondición para los métodos que lo requieran.

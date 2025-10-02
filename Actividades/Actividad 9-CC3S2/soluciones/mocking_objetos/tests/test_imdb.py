@@ -90,7 +90,39 @@ class TestIMDbDatabase:
         )
 
     @patch("models.imdb.requests.get")
+    def test_movie_reviews_failure(self, mock_get):
+        """Prueba que la obtención de reseñas maneja casos fallidos"""
+        # Configurar el mock para devolver una respuesta fallida
+        mock_response = Mock(spec=Response)
+        mock_response.status_code = 404
+        mock_get.return_value = mock_response
+
+        imdb = IMDb(apikey="fake_api_key")
+        resultado = imdb.movie_reviews("tt1375666")
+
+        assert resultado == {}
+        mock_get.assert_called_once_with(
+            "https://imdb-api.com/API/Reviews/fake_api_key/tt1375666"
+        )
+
+    @patch("models.imdb.requests.get")
     def test_movie_ratings_success(self, mock_get):
+        """Prueba que la obtención de calificaciones maneja casos fallidos"""
+        # Configurar el mock para devolver una respuesta fallida
+        mock_response = Mock(spec=Response)
+        mock_response.status_code = 404
+        mock_get.return_value = mock_response
+
+        imdb = IMDb(apikey="fake_api_key")
+        resultado = imdb.movie_ratings("tt1375666")
+
+        assert resultado == {}
+        mock_get.assert_called_once_with(
+            "https://imdb-api.com/API/Ratings/fake_api_key/tt1375666"
+        )
+
+    @patch("models.imdb.requests.get")
+    def test_movie_ratings_failure(self, mock_get):
         """Prueba que la obtención de calificaciones retorna datos correctamente"""
         # Configurar el mock para devolver una respuesta exitosa
         mock_response = Mock(spec=Response)
