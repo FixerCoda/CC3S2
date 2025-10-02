@@ -253,3 +253,9 @@ idempotency-http: ## Verifica que GET es idempotente
 	R2="$$(curl -fsS "$$URL")"; \
 	R3="$$(curl -fsS "$$URL")"; \
 	test "$$R1" = "$$R2" && test "$$R2" = "$$R3" && echo "GET es idempotente"
+
+.PHONY: tls13-gate
+tls13-gate: ## Falla si el endpoint no negocia TLSv1.3
+	@set -euo pipefail; \
+	OUT="$$(openssl s_client -connect miapp.local:443 -servername miapp.local -brief </dev/null 2>&1)"; \
+	echo "$$OUT" | grep -q 'Protocol version: TLSv1.3' && echo "OK TLSv1.3" || { echo "ERROR: No TLSv1.3"; exit 1; }

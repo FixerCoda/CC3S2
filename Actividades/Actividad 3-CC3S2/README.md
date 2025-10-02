@@ -168,6 +168,53 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 - Evidencia (salida del comando que valida la versión), y
 - Acción (fallar el job con un código de salida ≠ 0 para evitar la promoción a la siguiente etapa). -->
 
+- Se inicia generando los certificados con `make tls-cert` y se configura la aplicación con _nginx_ como proxy inverso con `make nginx`.
+
+    ![Make TLS Cert](./capturas/make-tls-cert.png)
+    ![Make Nginx](./capturas/make-nginx.png)
+
+- Se verifica el handshake TLS y se inspecciona las cabeceras HTTP con `make check-tls`.
+
+    ![Make Check TLS](./capturas/make-check-tls.png)
+
+- Nginx actúa como terminador SSL, descifrando el tráfico HTTPS en el puerto 443 usando los certificados autofirmados (generados previamente). Una vez descifrado, el tráfico HTTP plano se reenvía al _backend Flask_. Se puede destructurar la configuración de esta manera:
+  - `proxy_pass http://127.0.0.1:8080`: Redirige tráfico al servicio Flask
+  - `proxy_set_header Host $host`: Preserva el nombre del host original
+  - `proxy_set_header X-Forwarded-For $remote_addr`: Registra IP del cliente
+  - `proxy_set_header X-Forwarded-Proto https`: Indica al _backend_ que la conexión original era HTTPS
+
+- Las versiones TLS permitidas son `TLSv1.2` y `TLSv1.3`. Para el entorno de laboratorio, la configuración es mucho más simplificada y permite certificados autofirmados; mientras que en un entorno de producción, se requieren mayores medidas de seguridad, como certificados confiables, cabeceras de seguridad y protocolos específicos.
+
+- Se verifica la ausencia de _HSTS_, debido a la configuración simple de la aplicación, con un resultado vacío en la ejecución del siguiente comando.
+
+    ```bash
+    curl -kI https://miapp.local/ | grep -iE 'strict-transport-security|x-forwarded-proto'
+    ```
+
+- Un posible _gate_ de calidad sería mediante un _target_ que verifique el protocolo usado. Se configura el _pipefail_ para interrumpir el flujo si falla.
+
+    ```make
+    .PHONY: tls13-gate
+    tls13-gate: ## Falla si el endpoint no negocia TLSv1.3
+    @set -euo pipefail; \
+    OUT="$$(openssl s_client -connect miapp.local:443 -servername miapp.local -brief </dev/null 2>&1)"; \
+    echo "$$OUT" | grep -q 'Protocol version: TLSv1.3' && echo "OK TLSv1.3" || { echo "ERROR: No TLSv1.3"; exit 1; }
+    ```
+
+  - **Condición**: Requiere la línea _Protocol version: TLSv1.3_ para no activar el código de salida 1.
+  - **Evidencia**:
+
+    ```bash
+    OK TLSv1.3
+    ```
+
+  - **Acción**:
+
+    ```bash
+    ERROR: No TLSv1.3
+    make: *** [Makefile:259: tls13-gate] Error 1
+    ```
+
 ### Puertos, procesos y firewall
 
 <!-- Usa ss/lsof para listar puertos/procesos de app y Nginx. Diferencia loopback de expuestos públicamente. Presenta una "foto" de conexiones activas y analiza patrones. Explica cómo restringirías el acceso al backend y qué test harías para confirmarlo. Integra systemd: instala el servicio, ajusta entorno seguro y prueba parada. Simula incidente (mata proceso) y revisa logs con journalctl. -->
