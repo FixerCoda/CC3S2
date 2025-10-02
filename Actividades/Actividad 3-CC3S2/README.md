@@ -1,8 +1,8 @@
 # Actividad 3: Integración de DevOps y DevSecOps con HTTP, DNS, TLS y 12-Factor App
 
 - Nombre: Diego Edson Bayes Santos
-- Fecha: 29/09/2025
-- Tiempo total:
+- Fecha: 02/10/2025
+- Tiempo total: 5h
 - Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ## Parte teórica
@@ -151,6 +151,10 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 ### DNS y caché en operación
 
 <!-- Configura IP estática en Netplan. Usa dig para observar TTL decreciente y getent local para resolución de miapp.local. Explica cómo opera sin zona pública, el camino stub/recursor/autoritativos y overrides locales. Diferencia respuestas cacheadas y autoritativas. -->
+
+- En una configuración sin zona pública, el resolver local opera como stub que delega recursión; es decir, las consultas DNS primero verifican overrides locales (/etc/hosts). Si no se resuelve, se envían consultas recursivas a resolvers configurados (8.8.8.8, 1.1.1.1) que a su vez traversan la jerarquía autoritativa (root → TLD → dominios específicos).
+
+- Las respuestas autoritativas provienen directamente de los nameservers dueños del dominio, mientras que las respuestas cacheadas son respuestas reutilizadas de consultas previas, típicamente de resolvers recursivos intermedios. Los overrides locales siempre prevalecen sobre cualquier resolución externa, permitiendo desarrollo interno o bloqueos sin dependencia de infraestructura DNS pública.
 
 ### TLS y seguridad en DevSecOps (Reverse Proxy)
 
