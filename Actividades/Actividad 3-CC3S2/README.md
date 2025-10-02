@@ -2,7 +2,7 @@
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 02/10/2025
-- Tiempo total: 5h
+- Tiempo total: 7h
 - Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ## Parte teórica
@@ -219,9 +219,32 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 
 <!-- Usa ss/lsof para listar puertos/procesos de app y Nginx. Diferencia loopback de expuestos públicamente. Presenta una "foto" de conexiones activas y analiza patrones. Explica cómo restringirías el acceso al backend y qué test harías para confirmarlo. Integra systemd: instala el servicio, ajusta entorno seguro y prueba parada. Simula incidente (mata proceso) y revisa logs con journalctl. -->
 
+- Se muestra la lista de puertas en modo LISTEN donde se muestra activo el puerto 8080 donde se encuentra nuestra aplicación, así como los puertos públicamente expuestos 80 y 443 que utiliza _nginx_ para la redirección. Para el primer caso, se usa el _localhost_ para exponer el puerto en modo _loopback_, es decir, únicamente accedido por la misma computadora para uso interno; mientras que los públicamente expuestos se usan para conectarse a redes públicas, como el caso de `0.0.0.0` para los puertos de HTTP (80) y HTTPS (443).
+
+    ![Listar Puertos](./capturas/list-port.png)
+
+- Una herramienta para restringir el acceso al backend sería el uso de _ufw_ para bloquear el acceso externo y limitarlo solo al uso interno, además de corroborarlo.
+
+    ```bash
+    sudo ufw deny 8080/tcp
+    sudo ufw status
+    ```
+
+- Se instaló el sevicio integrándolo con _systemd_ correctamente.
+
+    ![Systemd Install](./capturas/systemd-install.png)
+
+- Se mató el proceso activo y se logró registrar el incidente. Con _journalctl_, se puede visualizar el levantamiento del servicio y el incidente registrado.
+
+    ![Journalctl Systemd](./capturas/journalctl-systemd.png)
+
 ### Integración CI/CD
 
 <!-- Diseña un script Bash que verifique HTTP, DNS, TLS y latencias antes del despliegue. Define umbrales (ej. latencia >0.5s falla). Ejecuta el script antes y después de una modificación (por ejemplo, cambio de puerto) y observa cómo se retroalimenta CALMS. -->
+
+- Se implementó un script de revisión pre-despliegue con un umbral de latencia que falla para valores mayores a 500ms.
+
+    ![Predeploy Check](./capturas/predeploy-check.png)
 
 ### Escenario integrado y mapeo 12-Factor
 

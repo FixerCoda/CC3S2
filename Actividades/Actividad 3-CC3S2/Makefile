@@ -219,8 +219,8 @@ systemd-install: ## Instalar/habilitar/iniciar el unit de systemd para la app
 	@if [ -z "$(SYSTEMCTL)" ]; then echo "systemctl no encontrado (omitiendo)"; exit 1; fi
 	@if [ -z "$(SED)" ]; then echo "sed no encontrado"; exit 1; fi
 	@echo "Renderizando unit con APP_DIR=$(APP_DIR) y USER=$$USER ..."
-	@$(SED) -e "s#{{APP_DIR}}#$(APP_DIR)#g" -e "s#{{USER}}#$$USER#g" systemd/miapp.service > /tmp/$(APP_NAME).service
-	@sudo cp /tmp/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
+	@$(SED) -e "s#{{APP_DIR}}#$(APP_DIR)#g" -e "s#{{USER}}#$$USER#g" systemd/miapp.service | \
+		sudo tee /etc/systemd/system/$(APP_NAME).service > /dev/null
 	@sudo systemctl daemon-reload
 	@sudo systemctl enable $(APP_NAME).service
 	@sudo systemctl restart $(APP_NAME).service
