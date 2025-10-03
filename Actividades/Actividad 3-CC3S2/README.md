@@ -2,7 +2,7 @@
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 02/10/2025
-- Tiempo total: 7h
+- Tiempo total: 9h
 - Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ## Parte teórica
@@ -250,8 +250,6 @@ Posibles controles incluyen la definición de headers de seguridad como `Strict-
 
 <!-- En este ejercicio deberás trabajar con un endpoint de la aplicación (por ejemplo, GET /) y modificarlo conceptualmente para introducir un fallo no idempotente, es decir, que al repetir la misma solicitud se altere el estado o la respuesta. La evidencia debe mostrar cómo dos peticiones idénticas generan resultados distintos y por qué esto rompe la idempotencia, afectando reintentos, cachés y balanceadores. -->
 
-<!-- Posteriormente, realiza un despliegue manual tipo blue/green, manteniendo dos instancias: una estable (Blue) y otra con el fallo (Green). Documenta cómo harías la conmutación de tráfico de Blue a Green únicamente si pasa los chequeos de readiness y liveness, y cómo ejecutarías un rollback rápido si se detecta el problema. -->
+- El uso de una variable que se actualiza tras cada _request_ rompe los reintentos. En cachés, las respuestas variables invalidan la premisa de que una misma llave siempre retorna el mismo valor, causando inconsistencia entre clientes. Para balanceadores de carga, la falta de idempotencia impide el routing aleatorio o round-robin, ya que diferentes réplicas del servicio podrían devolver respuestas distintas para la misma solicitud.
 
-<!-- A continuación, redacta un postmortem que incluya un resumen del incidente, una línea de tiempo, impacto en usuarios, causa raíz, lecciones técnicas y culturales, además de acciones preventivas desde una perspectiva DevSecOps. Después, propone un runbook breve, entendido como un procedimiento paso a paso que cualquier integrante del equipo pueda seguir en caso de repetir el incidente. -->
-
-<!-- Finalmente, completa una tabla con seis factores de 12-Factor App, explicando para cada uno: el principio, cómo está implementado en el laboratorio, la evidencia recogida y qué mejora propondrías hacia producción. -->
+    ![Non Idempotent](./capturas/non-idempotent.png)

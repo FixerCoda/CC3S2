@@ -39,6 +39,15 @@ def healthz():
 def readyz():
     return jsonify(ready=True)
 
+counter = {"value": 0}
+
+@app.route("/non-idempotent")
+def non_idempotent():
+    # ¡ANTI-PATRÓN! Sólo para demo: GET muta estado
+    counter["value"] += 1
+    print(f"[WARN] GET /non-idempotent increments counter={counter['value']}", file=sys.stdout, flush=True)
+    return jsonify(counter=counter["value"])
+
 if __name__ == "__main__":
     # 12-Factor: vincular a un puerto; proceso único; sin estado
     app.run(host="127.0.0.1", port=PORT)
