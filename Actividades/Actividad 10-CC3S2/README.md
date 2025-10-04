@@ -21,6 +21,8 @@
 
 ### Parte 4: Refinamiento de backlog
 
+![Refinamiento Backlog](./capturas/labels.png)
+
 ## Ejercicios
 
 ### Ejercicio 1: Crear un epic y vincular historias de usuario
