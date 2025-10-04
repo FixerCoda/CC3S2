@@ -17,6 +17,8 @@
 
 ### Parte 3: Historias de usuario
 
+![Historias Usuario](./capturas/user-stories.png)
+
 ### Parte 4: Refinamiento de backlog
 
 ## Ejercicios
