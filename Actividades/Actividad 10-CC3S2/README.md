@@ -9,6 +9,8 @@
 
 ### Parte 1: Configuración inicial
 
+![Kanban Board](./capturas/kanban-board.png)
+
 ### Parte 2: Issue Template
 
 ### Parte 3: Historias de usuario
