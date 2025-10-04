@@ -2,7 +2,7 @@
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 04/10/2025
-- Tiempo total: 0h
+- Tiempo total: 2h
 - Entorno usado: IDE Visual Studio Code y Github
 
 ## Instrucciones
@@ -26,6 +26,8 @@
 ## Ejercicios
 
 ### Ejercicio 1: Crear un epic y vincular historias de usuario
+
+![Epic](./capturas/1-epic.png)
 
 ### Ejercicio 2: Uso avanzado de etiquetas (labels) para priorización y estado
 
