@@ -13,6 +13,8 @@
 
 ### Parte 2: Issue Template
 
+![Issue Template](./capturas/issue-template.png)
+
 ### Parte 3: Historias de usuario
 
 ### Parte 4: Refinamiento de backlog
