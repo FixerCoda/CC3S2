@@ -1,8 +1,8 @@
 # Actividad 10 - pytest + coverage + fixtures + factories + mocking + TDD
 
 - Nombre: Diego Edson Bayes Santos
-- Fecha: 04/10/2025
-- Tiempo total: 2h
+- Fecha: 05/10/2025
+- Tiempo total: 4h
 - Entorno usado: IDE Visual Studio Code y Github
 
 ## Instrucciones
@@ -50,3 +50,15 @@ Se implementaron las siguientes reglas de automatización:
 ![Refinamiento Backlog](./capturas/5-refinamiento-backlog.png)
 
 ### Ejercicio 6: Análisis del flujo de trabajo usando el Kanban board
+
+Se modificó el Kanban para poder revisar las métricas del proyecto.
+
+![Test Kanban](./capturas/6-test-kanban.png)
+
+Métrica: Tiempo promedio en cada columna
+
+![Tiempo Promedio Columna](./capturas/6-average-time-per-column.png)
+
+Métrica: Número de historias completadas
+
+![Historias Completadas](./capturas/6-completed-stories.png)
