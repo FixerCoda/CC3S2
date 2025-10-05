@@ -1,0 +1,96 @@
+name: Kanban Board Automation
+on:
+    issues:
+        types: [closed]
+    pull_request:
+        types: [opened, ready_for_review, closed]
+
+env:
+    ICEBOX_COLUMN_ID: ${{ secrets.ICEBOX_COLUMN_ID }}
+    PRODUCT_BACKLOG_COLUMN_ID: ${{ secrets.PRODUCT_BACKLOG_COLUMN_ID }}
+    SPRINT_BACKLOG_COLUMN_ID: ${{ secrets.SPRINT_BACKLOG_COLUMN_ID }}
+    IN_PROGRESS_COLUMN_ID: ${{ secrets.IN_PROGRESS_COLUMN_ID }}
+    REVIEW_QA_COLUMN_ID: ${{ secrets.REVIEW_QA_COLUMN_ID }}
+    DONE_COLUMN_ID: ${{ secrets.DONE_COLUMN_ID }}
+
+jobs:
+    automate-kanban:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Move to In Progress when PR created
+              if: github.event_name == 'pull_request' && github.event.action == 'opened'
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const inProgressColumn = process.env.IN_PROGRESS_COLUMN_ID;
+
+                      const cards = await github.rest.projects.listCards({
+                        column_id: process.env.SPRINT_BACKLOG_COLUMN_ID,
+                        archived_state: 'not_archived'
+                      });
+                      const issueNumber = context.payload.pull_request.number;
+                      const targetCard = cards.data.find(card => card.content_url.includes(`/issues/${issueNumber}`));
+
+                      if (targetCard) {
+                        await github.rest.projects.moveCard({
+                          card_id: targetCard.id,
+                          position: 'bottom',
+                          column_id: inProgressColumn
+                        });
+                      }
+
+            - name: Move to Review/QA when PR ready for review
+              if: github.event_name == 'pull_request' && github.event.action == 'ready_for_review'
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const reviewColumn = process.env.REVIEW_QA_COLUMN_ID;
+                      const cards = await github.rest.projects.listCards({
+                        column_id: process.env.IN_PROGRESS_COLUMN_ID,
+                        archived_state: 'not_archived'
+                      });
+                      const issueNumber = context.payload.pull_request.number;
+                      const targetCard = cards.data.find(card => card.content_url.includes(`/issues/${issueNumber}`));
+
+                      if (targetCard) {
+                        await github.rest.projects.moveCard({
+                          card_id: targetCard.id,
+                          position: 'bottom',
+                          column_id: reviewColumn
+                        });
+                      }
+
+            - name: Move to Done when PR merged or issue closed
+              if: |
+                  (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged) ||
+                  (github.event_name == 'issues' && github.event.action == 'closed')
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const doneColumn = process.env.DONE_COLUMN_ID;
+                      let issueNumber;
+
+                      if (github.event_name == 'pull_request') {
+                        issueNumber = context.payload.pull_request.number;
+                      } else {
+                        issueNumber = context.payload.issue.number;
+                      }
+
+                      const projectColumns = [process.env.SPRINT_BACKLOG_COLUMN_ID, process.env.IN_PROGRESS_COLUMN_ID, process.env.REVIEW_QA_COLUMN_ID];
+
+                      for (const columnId of projectColumns) {
+                        const cards = await github.rest.projects.listCards({
+                          column_id: columnId,
+                          archived_state: 'not_archived'
+                        });
+                        
+                        const targetCard = cards.data.find(card => card.content_url.includes(`/issues/${issueNumber}`));
+                        if (targetCard) {
+                          await github.rest.projects.moveCard({
+                            card_id: targetCard.id,
+                            position: 'bottom',
+                            column_id: doneColumn
+                          });
+                          break;
+                        }
+                      }

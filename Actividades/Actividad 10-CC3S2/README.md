@@ -31,7 +31,15 @@
 
 ### Ejercicio 2: Uso avanzado de etiquetas (labels) para priorización y estado
 
-### Ejercicio 3: Uso avanzado de etiquetas (labels) para priorización y estado
+![Nuevas Etiquetas](./capturas/2-new-labels.png)
+
+### Ejercicio 3: Automatización de Kanban board con GitHub Actions
+
+Se implementaron las siguientes reglas de automatización:
+
+- Move to In Progress when PR created
+- Move to Review/QA when PR ready for review
+- Move to Done when PR merged or issue closed
 
 ### Ejercicio 4: Seguimiento de tiempo y esfuerzo usando GitHub Projects
 
