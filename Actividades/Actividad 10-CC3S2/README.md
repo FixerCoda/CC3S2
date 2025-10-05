@@ -1,4 +1,4 @@
-# Actividad 10 - pytest + coverage + fixtures + factories + mocking + TDD
+# Actividad 10 - Gestión ágil de proyectos con GitHub Projects, configuración de Kanban Board y creación de historias de usuario
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 05/10/2025
