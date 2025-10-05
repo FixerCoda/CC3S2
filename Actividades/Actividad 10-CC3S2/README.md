@@ -43,6 +43,10 @@ Se implementaron las siguientes reglas de automatización:
 
 ### Ejercicio 4: Seguimiento de tiempo y esfuerzo usando GitHub Projects
 
+![Seguimiento Tiempo](./capturas/4--seguimiento-tiempo.png)
+
 ### Ejercicio 5: Refinamiento de backlog basado en comentarios de los stakeholders
+
+![Refinamiento Backlog](./capturas/5-refinamiento-backlog.png)
 
 ### Ejercicio 6: Análisis del flujo de trabajo usando el Kanban board
