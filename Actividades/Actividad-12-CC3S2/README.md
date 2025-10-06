@@ -1,4 +1,4 @@
-# Actividad 11 - Gestión ágil de sprints con GitHub, planificación, ejecución y cierre de Sprints
+# Actividad 12 - Gestión ágil de sprints con GitHub, planificación, ejecución y cierre de Sprints
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 05/10/2025

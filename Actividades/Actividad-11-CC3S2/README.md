@@ -1,4 +1,4 @@
-# Actividad 12 - Gestión ágil de proyectos con GitHub Projects, configuración de Kanban Board y creación de historias de usuario
+# Actividad 11 - Gestión ágil de proyectos con GitHub Projects, configuración de Kanban Board y creación de historias de usuario
 
 - Nombre: Diego Edson Bayes Santos
 - Fecha: 05/10/2025
