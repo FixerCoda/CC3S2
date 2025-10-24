@@ -10,6 +10,8 @@ from typing import Any, Dict
 
 import requests
 
+from src.servicios.http_abstraction import HttpClient
+
 logger = logging.getLogger(__name__)
 
 ALLOWED_HOSTS = {"imdb-api.com"}
@@ -24,10 +26,12 @@ def _enforce_policies(url: str):
         raise ValueError("Se requiere HTTPS")
 
 
-class IMDb:
+class ImdbService:
     """Acceso a la base de datos de películas de Internet Movie Database"""
 
-    def __init__(self, apikey: str, http_client=None):
+    BASE = "https://imdb-api.com/API"
+
+    def __init__(self, apikey: str, http_client: HttpClient = None):
         self.apikey = apikey
         self.http = http_client or requests
 
@@ -42,20 +46,20 @@ class IMDb:
     def search_titles(self, title: str) -> Dict[str, Any]:
         """Busca una película por título"""
         logger.info("Buscando en IMDb el título: %s", title)
-        url = f"https://imdb-api.com/API/SearchTitle/{self.apikey}/{title}"  # noqa: E231
+        url = f"{self.BASE}/SearchTitle/{self.apikey}/{title}"  # noqa: E231
 
         return self.get_url(url)
 
     def movie_reviews(self, imdb_id: str) -> Dict[str, Any]:
         """Obtiene reseñas para una película"""
         logger.info("Buscando en IMDb las reseñas: %s", imdb_id)
-        url = f"https://imdb-api.com/API/Reviews/{self.apikey}/{imdb_id}"  # noqa: E231
+        url = f"{self.BASE}/Reviews/{self.apikey}/{imdb_id}"  # noqa: E231
 
         return self.get_url(url)
 
     def movie_ratings(self, imdb_id: str) -> Dict[str, Any]:
         """Obtiene calificaciones para una película"""
         logger.info("Buscando en IMDb las calificaciones: %s", imdb_id)
-        url = f"https://imdb-api.com/API/Ratings/{self.apikey}/{imdb_id}"  # noqa: E231
+        url = f"{self.BASE}/Ratings/{self.apikey}/{imdb_id}"  # noqa: E231
 
         return self.get_url(url)

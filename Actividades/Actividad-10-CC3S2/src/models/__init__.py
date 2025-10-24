@@ -1,3 +1,3 @@
-from .imdb import IMDb as IMDb
+from src.models.imdb import ImdbService as ImdbService
 
-__all__ = ["IMDb"]
+__all__ = ["ImdbService"]

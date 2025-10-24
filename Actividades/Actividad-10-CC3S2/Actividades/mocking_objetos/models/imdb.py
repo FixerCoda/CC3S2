@@ -1,6 +1,6 @@
 from typing import Any
 
-from Actividades.mocking_objetos.http_abstraction import HttpClient
+from src.servicios.http_abstraction import HttpClient
 
 
 class ImdbService:

@@ -14,7 +14,7 @@ from unittest.mock import Mock, patch
 import pytest
 from requests import Response
 
-from src.models.imdb import TIMEOUT, IMDb, _enforce_policies
+from src.models.imdb import TIMEOUT, ImdbService, _enforce_policies
 
 
 # Fixture para cargar los datos de IMDb desde un archivo JSON
@@ -22,7 +22,9 @@ from src.models.imdb import TIMEOUT, IMDb, _enforce_policies
 def imdb_data():
     """Carga las respuestas de IMDb necesarias para las pruebas"""
     current_dir = os.path.dirname(__file__)
-    fixture_path = os.path.join(current_dir, "../Actividades/pruebas_fixtures/fixtures", "imdb_responses.json")
+    fixture_path = os.path.join(
+        current_dir, "../Actividades/pruebas_fixtures/fixtures", "imdb_responses.json"
+    )
     with open(fixture_path) as json_data:
         data = json.load(json_data)
         print("Contenido de imdb_data:", data)  # Para depuración
@@ -48,7 +50,7 @@ class TestIMDbDatabase:
         mock_response.json.return_value = self.imdb_data["search_title"]
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.search_titles("Bambi")
 
         assert resultado == self.imdb_data["search_title"]
@@ -66,7 +68,7 @@ class TestIMDbDatabase:
         mock_response.json.return_value = {}
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.search_titles("TituloInexistente")
 
         assert resultado == {}
@@ -84,7 +86,7 @@ class TestIMDbDatabase:
         mock_response.json.return_value = self.imdb_data["movie_reviews"]
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.movie_reviews("tt1375666")
 
         assert resultado == self.imdb_data["movie_reviews"]
@@ -101,7 +103,7 @@ class TestIMDbDatabase:
         mock_response.status_code = 404
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.movie_reviews("tt1375666")
 
         assert resultado == {}
@@ -118,7 +120,7 @@ class TestIMDbDatabase:
         mock_response.status_code = 404
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.movie_ratings("tt1375666")
 
         assert resultado == {}
@@ -136,7 +138,7 @@ class TestIMDbDatabase:
         mock_response.json.return_value = self.imdb_data["movie_ratings"]
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultado = imdb.movie_ratings("tt1375666")
 
         assert resultado == self.imdb_data["movie_ratings"]
@@ -156,7 +158,7 @@ class TestIMDbDatabase:
         )
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="bad-key")
+        imdb = ImdbService(apikey="bad-key")
         resultados = imdb.search_titles("Bambi")
 
         assert resultados is not None
@@ -173,7 +175,7 @@ class TestIMDbDatabase:
         )
         mock_get.return_value = mock_response
 
-        imdb = IMDb(apikey="fake_api_key")
+        imdb = ImdbService(apikey="fake_api_key")
         resultados = imdb.movie_ratings("tt1375666")
 
         assert resultados is not None
@@ -192,7 +194,7 @@ class TestIMDbDatabase:
         mock_resp.json.return_value = imdb_data["search_title"]
         http.get.return_value = mock_resp
 
-        imdb = IMDb(apikey="fake_api_key", http_client=http)
+        imdb = ImdbService(apikey="fake_api_key", http_client=http)
         out = imdb.search_titles("Bambi")
 
         http.get.assert_called_once_with(

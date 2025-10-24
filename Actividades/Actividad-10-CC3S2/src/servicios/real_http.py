@@ -4,7 +4,7 @@ import urllib.parse as up
 
 import requests
 
-from .http_abstraction import HttpClient
+from src.servicios.http_abstraction import HttpClient
 
 LOGGER = logging.getLogger("imdb")
 ALLOWLIST = {"imdb-api.com", "api.themoviedb.org"}
