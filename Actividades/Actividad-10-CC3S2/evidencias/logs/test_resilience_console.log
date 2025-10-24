@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/fixercoda/CC3S2/Actividades/Actividad-10-CC3S2
+plugins: cov-6.3.0
+collecting ... collected 3 items
+
+tests/test_resilience.py::test_timeout_logged_redacted 
+-------------------------------- live log call ---------------------------------
+WARNING  imdb:fake_http.py:24 Request timeout for https://imdb-api.com/API/Ratings/KEY/tt0111161 with headers: Authorization: Bearer <REDACTED>
+PASSED                                                                   [ 33%]
+tests/test_resilience.py::test_http_500_branch PASSED                    [ 66%]
+tests/test_resilience.py::test_malformed_payload_branch PASSED           [100%]
+
+============================== 3 passed in 2.11s ===============================

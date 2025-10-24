@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/fixercoda/CC3S2/Actividades/Actividad-10-CC3S2
+plugins: cov-6.3.0
+collecting ... collected 6 items
+
+tests/tests_accounts.py::test_valid_account PASSED                       [ 16%]
+tests/tests_accounts.py::test_missing_fields[id] PASSED                  [ 33%]
+tests/tests_accounts.py::test_missing_fields[email] PASSED               [ 50%]
+tests/tests_accounts.py::test_missing_fields[role] PASSED                [ 66%]
+tests/tests_accounts.py::test_missing_fields[active] PASSED              [ 83%]
+tests/tests_accounts.py::test_corrupt_types PASSED                       [100%]
+
+============================== 6 passed in 0.01s ===============================

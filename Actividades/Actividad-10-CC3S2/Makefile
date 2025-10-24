@@ -1,6 +1,6 @@
 # Flags comunes para pytest (puedes ampliarlas)
 PYTEST_FLAGS ?= -q
-COVERAGE_FLAGS ?= --cov=models --cov=tests --cov-report=term-missing --cov-fail-under=85
+COVERAGE_FLAGS ?= --cov-report=term-missing --cov-fail-under=85
 PY_WARNINGS  ?= ignore::DeprecationWarning
 
 # Lint (modo "relajado" por defecto para desarrollo)
@@ -43,7 +43,7 @@ test:
 coverage:
 	@echo "Ejecutando cobertura"
 	@coverage erase
-	PYTHONWARNINGS="$(PY_WARNINGS)" coverage run --source=. -m pytest . $(PYTEST_FLAGS) $(COVERAGE_FLAGS);
+	PYTHONWARNINGS="$(PY_WARNINGS)" coverage run -m pytest . $(PYTEST_FLAGS) $(COVERAGE_FLAGS);
 	@echo "Generando reporte"
 	@coverage report -m
 	@coverage html -d htmlcov

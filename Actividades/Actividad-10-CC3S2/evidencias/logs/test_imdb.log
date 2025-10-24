@@ -1,0 +1,9 @@
+INFO     src.models.imdb:imdb.py:44 Buscando en IMDb el título: Bambi
+INFO     src.models.imdb:imdb.py:44 Buscando en IMDb el título: TituloInexistente
+INFO     src.models.imdb:imdb.py:51 Buscando en IMDb las reseñas: tt1375666
+INFO     src.models.imdb:imdb.py:51 Buscando en IMDb las reseñas: tt1375666
+INFO     src.models.imdb:imdb.py:58 Buscando en IMDb las calificaciones: tt1375666
+INFO     src.models.imdb:imdb.py:58 Buscando en IMDb las calificaciones: tt1375666
+INFO     src.models.imdb:imdb.py:44 Buscando en IMDb el título: Bambi
+INFO     src.models.imdb:imdb.py:58 Buscando en IMDb las calificaciones: tt1375666
+INFO     src.models.imdb:imdb.py:44 Buscando en IMDb el título: Bambi
