@@ -2,7 +2,6 @@
 Casos de prueba para el mocking
 """
 
-import json
 import os
 import sys
 

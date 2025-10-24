@@ -3,7 +3,6 @@ Casos de prueba para validar que assert_called_once_with falla correctamente
 cuando falta el kwarg timeout=TIMEOUT
 """
 
-import json
 import os
 import sys
 

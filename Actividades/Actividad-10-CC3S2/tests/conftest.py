@@ -26,12 +26,11 @@ class SecretRedactor(logging.Filter):
 def imdb_data():
     """Carga las respuestas de IMDb necesarias para las pruebas"""
     current_dir = os.path.dirname(__file__)
-    fixture_path = os.path.join(
-        current_dir, "fixtures", "imdb_responses.json"
-    )
+    fixture_path = os.path.join(current_dir, "fixtures", "imdb_responses.json")
     with open(fixture_path) as json_data:
         data = json.load(json_data)
         return data
+
 
 @pytest.fixture(autouse=True)
 def _redacted_logging(caplog):

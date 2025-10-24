@@ -33,6 +33,7 @@ def imdb_data():
         data = json.load(json_data)
         return data
 
+
 @pytest.fixture(autouse=True)
 def _redacted_logging(caplog):
     logger = logging.getLogger()
