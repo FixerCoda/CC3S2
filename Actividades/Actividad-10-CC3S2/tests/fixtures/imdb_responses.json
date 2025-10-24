@@ -13,6 +13,48 @@
         ],
         "errorMessage": null
     },
+    "search_title_spaces": {
+        "searchType": "Title",
+        "expression": "Star Wars Episode IV",
+        "results": [
+            {
+                "id": "tt1375667",
+                "resultType": "Movie",
+                "image": null,
+                "title": "Star Wars Episode IV",
+                "description": "Star Wars Episode IV"
+            }
+        ],
+        "errorMessage": null
+    },
+    "search_title_colon": {
+        "searchType": "Title",
+        "expression": "Star Wars: Episode IV",
+        "results": [
+            {
+                "id": "tt1375666",
+                "resultType": "Movie",
+                "image": null,
+                "title": "Star Wars: Episode IV",
+                "description": "Star Wars: Episode IV"
+            }
+        ],
+        "errorMessage": null
+    },
+    "search_title_ampersand": {
+        "searchType": "Title",
+        "expression": "Star Wars & Episode IV",
+        "results": [
+            {
+                "id": "tt1375666",
+                "resultType": "Movie",
+                "image": null,
+                "title": "Star Wars & Episode IV",
+                "description": "Star Wars & Episode IV"
+            }
+        ],
+        "errorMessage": null
+    },
     "INVALID_API": {
         "searchType": "Title",
         "expression": "Bambi",
