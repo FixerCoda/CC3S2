@@ -17,27 +17,6 @@ from requests import Response
 from src.models.imdb import TIMEOUT, IMDb, _enforce_policies
 
 
-def test_politica_rechaza_host_no_permitido():
-    with pytest.raises(ValueError):
-        _enforce_policies("https://malicioso.evil/xx")
-
-
-def test_search_titles_con_cliente_inyectado(imdb_data):
-    http = Mock()
-    mock_resp = Mock(status_code=200)
-    mock_resp.json.return_value = imdb_data["search_title"]
-    http.get.return_value = mock_resp
-
-    imdb = IMDb(apikey="fake_api_key", http_client=http)
-    out = imdb.search_titles("Bambi")
-
-    http.get.assert_called_once_with(
-        "https://imdb-api.com/API/SearchTitle/fake_api_key/Bambi",
-        timeout=TIMEOUT,  # si ya implementaste políticas
-    )
-    assert out == imdb_data["search_title"]
-
-
 # Fixture para cargar los datos de IMDb desde un archivo JSON
 @pytest.fixture(scope="session")
 def imdb_data():
@@ -201,3 +180,23 @@ class TestIMDbDatabase:
         assert resultados["title"] == "Bambi"
         assert resultados["filmAffinity"] == 3
         assert resultados["rottenTomatoes"] == 5
+
+    def test_politica_rechaza_host_no_permitido(self):
+        with pytest.raises(ValueError):
+            _enforce_policies("https://malicioso.evil/xx")
+
+    @patch("src.models.imdb.requests.get")
+    def test_search_titles_con_cliente_inyectado(self, imdb_data):
+        http = Mock()
+        mock_resp = Mock(status_code=200)
+        mock_resp.json.return_value = imdb_data["search_title"]
+        http.get.return_value = mock_resp
+
+        imdb = IMDb(apikey="fake_api_key", http_client=http)
+        out = imdb.search_titles("Bambi")
+
+        http.get.assert_called_once_with(
+            "https://imdb-api.com/API/SearchTitle/fake_api_key/Bambi",
+            timeout=TIMEOUT,
+        )
+        assert out == imdb_data["search_title"]

@@ -1,5 +1,6 @@
 # Flags comunes para pytest (puedes ampliarlas)
 PYTEST_FLAGS ?= -q
+COVERAGE_FLAGS ?= --cov=models --cov=tests --cov-report=term-missing --cov-fail-under=85
 PY_WARNINGS  ?= ignore::DeprecationWarning
 
 # Lint (modo "relajado" por defecto para desarrollo)
@@ -7,38 +8,6 @@ LINT_MAX_LINE ?= 88
 LINT_IGNORE   ?= E501,W391,W293
 # Ignora F401 en reexport del __init__ y E402 solo en archivos de tests
 LINT_PER_FILE ?= src/models/__init__.py:F401,tests/*.py:E402
-
-# Ayuda
-
-.PHONY: help
-help:
-	@echo "Uso: make [comando] [opciones]"
-	@echo
-	@echo "Comandos disponibles:"
-	@echo "  install              Instala dependencias (requirements.txt y opcionalmente requirements-dev.txt)"
-	@echo "  lint                 Formatea (ruff), ordena imports (ruff I), autofix y pasa flake8 relajado"
-	@echo "  test                 Ejecuta pytest en la actividad indicada (ACTIVITY)"
-	@echo "  test_all             Ejecuta pytest en todas las actividades"
-	@echo "  coverage             Ejecuta pytest con cobertura unificada (todas las actividades)"
-	@echo "  coverage_individual  Ejecuta la cobertura para cada actividad por separado"
-	@echo "  clean                Elimina archivos temporales, caches, etc."
-	@echo
-	@echo "Opciones:"
-	@echo "  ACTIVITY=<nombre>    Actividad especifica (por defecto: aserciones_pruebas)"
-	@echo "  PYTEST_FLAGS='-q -k expr'  Banderas extra para pytest"
-	@echo
-	@echo "Ejemplos:"
-	@echo "  make install"
-	@echo "  make lint"
-	@echo "  make test"
-	@echo "  make test ACTIVITY=pruebas_pytest"
-	@echo "  make coverage"
-	@echo "  make coverage_individual"
-	@echo
-	@echo "Actividades disponibles:"
-	@echo "  $(ACTIVITIES)"
-
-# Instalar dependencias
 
 .PHONY: install
 install:
@@ -48,8 +17,6 @@ install:
 		echo "Instalando dependencias de desarrollo..."; \
 		pip install -r requirements-dev.txt; \
 	fi
-
-# Lint / Formato (una sola diana)
 
 .PHONY: lint
 lint:
@@ -66,24 +33,24 @@ lint:
 	    --per-file-ignores="$(LINT_PER_FILE)"
 	@echo "Lint OK"
 
-# Test
-
 .PHONY: test
 test:
 	@echo "Ejecutando pruebas"
 	PYTHONWARNINGS="$(PY_WARNINGS)" pytest . $(PYTEST_FLAGS)
 
-# Coverage
 
-.PHONY: coverage coverage_individual
+.PHONY: coverage
 coverage:
 	@echo "Ejecutando cobertura"
 	@coverage erase
-	PYTHONWARNINGS="$(PY_WARNINGS)" coverage run --source=. -m pytest . $(PYTEST_FLAGS);
+	PYTHONWARNINGS="$(PY_WARNINGS)" coverage run --source=. -m pytest . $(PYTEST_FLAGS) $(COVERAGE_FLAGS);
+	@echo "Generando reporte"
 	@coverage report -m
 	@coverage html -d htmlcov
 
-# Limpiar
+.PHONY: gates
+gates: lint coverage
+	@echo "Gates OK"
 
 .PHONY: clean
 clean:
@@ -95,3 +62,18 @@ clean:
 	rm -rf .coverage htmlcov 2>/dev/null || true
 	coverage erase || true
 	@echo "Limpieza completa."
+
+.PHONY: help
+help:
+	@echo "Uso: make [comando] [opciones]"
+	@echo
+	@echo "Comandos disponibles:"
+	@echo "  install              Instala dependencias (requirements.txt y opcionalmente requirements-dev.txt)"
+	@echo "  lint                 Formatea (ruff), ordena imports (ruff I), autofix y pasa flake8 relajado"
+	@echo "  test                 Ejecuta pytest para el suite de pruebas"
+	@echo "  coverage             Ejecuta pytest con cobertura para el suite de pruebas"
+	@echo "  gates                Ejecuta lint y coverage como gate de calidad"
+	@echo "  clean                Elimina archivos temporales, caches, etc."
+	@echo
+	@echo "Opciones:"
+	@echo "  PYTEST_FLAGS='-q -k expr'  Banderas extra para pytest"
