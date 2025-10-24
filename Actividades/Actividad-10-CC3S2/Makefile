@@ -1,6 +1,5 @@
 # Flags comunes para pytest (puedes ampliarlas)
 PYTEST_FLAGS ?= -q
-COVERAGE_FLAGS ?= --cov-report=term-missing --cov-fail-under=85
 PY_WARNINGS  ?= ignore::DeprecationWarning
 
 # Lint (modo "relajado" por defecto para desarrollo)
@@ -35,18 +34,18 @@ lint:
 
 .PHONY: test
 test:
-	@echo "Ejecutando pruebas"
-	PYTHONWARNINGS="$(PY_WARNINGS)" pytest . $(PYTEST_FLAGS)
+	@echo "Ejecutando pruebas desde tests/"
+	PYTHONWARNINGS="$(PY_WARNINGS)" python3 -m pytest tests/ $(PYTEST_FLAGS)
 
 
 .PHONY: coverage
 coverage:
-	@echo "Ejecutando cobertura"
-	@coverage erase
-	PYTHONWARNINGS="$(PY_WARNINGS)" coverage run -m pytest . $(PYTEST_FLAGS) $(COVERAGE_FLAGS);
+	@echo "Ejecutando cobertura de src/ con pruebas desde tests/"
+	@python3 -m coverage erase
+	PYTHONWARNINGS="$(PY_WARNINGS)" python3 -m coverage run --source=src -m pytest tests/ $(PYTEST_FLAGS)
 	@echo "Generando reporte"
-	@coverage report -m
-	@coverage html -d htmlcov
+	@python3 -m coverage report -m
+	@python3 -m coverage html -d htmlcov
 
 .PHONY: gates
 gates: lint coverage

@@ -1,12 +1,16 @@
 import logging
 import time
-from typing import Dict, Any
+from typing import Any, Dict
 
 LOGGER = logging.getLogger("imdb")
 
+
 class FakeHttpClient:
     """No network. Serves preloaded fixtures; can simulate errors/timeouts."""
-    def __init__(self, fixtures: Dict[str, Any], delay_ms: int = 0, fail_mode: str | None = None):
+
+    def __init__(
+        self, fixtures: Dict[str, Any], delay_ms: int = 0, fail_mode: str | None = None
+    ):
         self._fx = fixtures
         self._delay = delay_ms / 1000.0
         self._fail_mode = fail_mode

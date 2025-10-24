@@ -1,7 +1,7 @@
 import logging
 import pytest
-from tests.fake_http import FakeHttpClient
-from tests.conftest import SecretRedactor
+from src.servicios.fake_http import FakeHttpClient
+from Actividades.pruebas_fixtures.conftest import SecretRedactor
 
 LOGGER = logging.getLogger("imdb")
 

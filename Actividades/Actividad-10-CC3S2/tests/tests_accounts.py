@@ -1,5 +1,5 @@
 import pytest
-from tests.validators import validate_account
+from src.servicios.validators import validate_account
 
 
 def test_valid_account(stub_valid_account):
