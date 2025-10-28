@@ -3,7 +3,7 @@ from shutil import copyfile
 
 # Parámetros de ejemplo para N entornos
 ENVS = [
-    {"name": f"app{i}"} for i in range(1, 11)
+    {"name": f"app{i}"} for i in range(1, 4)
 ]
 
 MODULE_DIR = "modules/simulated_app"
