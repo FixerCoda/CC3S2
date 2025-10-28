@@ -48,3 +48,17 @@ Terraform puede aplicar cambios *in-place* para evitar destruir y crear el recur
 - ¿Qué pasa si editas directamente main.tf.json en lugar de la plantilla de variables?
 
 Si se edita main.tf.json directamente, se perdería la separación de configuración y valores, lo que afecta la reutilización de estos y favocere el acoplamiento del código.
+
+## Fase 2: Entendiendo la inmutabilidad
+
+```bash
+python legacy_to_terraform.py
+cd converted
+terraform init
+terraform plan
+terraform apply
+```
+
+![Legacy to Transform](./capturas/legacy-to-transform.png)
+
+## Fase 3: Escribiendo código limpio en IaC
