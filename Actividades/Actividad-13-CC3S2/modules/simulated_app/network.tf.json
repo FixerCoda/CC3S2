@@ -5,7 +5,7 @@
                 {
                     "type": "string",
                     "default": "new-name",
-                    "description": "Nombre del servidor local"
+                    "description": "Nuevo nombre para ajustar a nuevos requerimientos"
                 }
             ]
         },
