@@ -17,6 +17,24 @@
                     "description": "Nombre de la red local"
                 }
             ]
+        },
+        {
+            "port": [
+                {
+                    "type": "string",
+                    "default": "8080",
+                    "description": "Puerto de la red local"
+                }
+            ]
+        },
+        {
+            "api_key": [
+                {
+                    "type": "string",
+                    "sensitive": true,
+                    "description": "API Key sensible (leer desde ENV: TF_VAR_api_key)"
+                }
+            ]
         }
     ]
 }

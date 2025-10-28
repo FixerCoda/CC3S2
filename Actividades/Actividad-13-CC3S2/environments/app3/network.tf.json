@@ -4,8 +4,8 @@
             "name": [
                 {
                     "type": "string",
-                    "default": "hello-world",
-                    "description": "Nombre del servidor local"
+                    "default": "app3",
+                    "description": "Nombre del servidor"
                 }
             ]
         },
@@ -13,8 +13,26 @@
             "network": [
                 {
                     "type": "string",
-                    "default": "lab-net",
-                    "description": "Nombre de la red local"
+                    "default": "net2-peered",
+                    "description": "Red del servidor"
+                }
+            ]
+        },
+        {
+            "port": [
+                {
+                    "type": "string",
+                    "default": "8080",
+                    "description": "Puerto del servidor"
+                }
+            ]
+        },
+        {
+            "api_key": [
+                {
+                    "type": "string",
+                    "sensitive": true,
+                    "description": "API Key sensible (leer desde ENV: TF_VAR_api_key)"
                 }
             ]
         }

@@ -62,3 +62,13 @@ terraform apply
 ![Legacy to Transform](./capturas/legacy-to-transform.png)
 
 ## Fase 3: Escribiendo código limpio en IaC
+
+- Al ejecutar `jq`, se formatea el archivo json según los ajustes estándar. En este caso, se cambió el tamaño de las indentaciones a 2.
+
+- Se añadió la variable `port` a la configuración.
+
+![Terraform Network Port](./capturas/terraform-port.png)
+
+- Se lee la variable de entorno `api_key` y se muestra como información sensible.
+
+![Terraform Api Key](./capturas/terraform-api-key.png)

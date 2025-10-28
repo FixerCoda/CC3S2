@@ -5,17 +5,17 @@
                 {
                     "app1": [
                         {
-                            "provisioner": [
-                                {
-                                    "local-exec": {
-                                        "command": "echo 'Arrancando servidor ${var.name} en red ${var.network}'"
-                                    }
-                                }
-                            ],
                             "triggers": {
                                 "name": "${var.name}",
                                 "network": "${var.network}"
-                            }
+                            },
+                            "provisioner": [
+                                {
+                                    "local-exec": {
+                                        "command": "echo 'Arrancando servidor ${var.name} en red ${var.network} puerto ${var.port} con API_KEY=${var.api_key}'"
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }
