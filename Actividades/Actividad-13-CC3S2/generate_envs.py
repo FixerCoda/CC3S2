@@ -3,7 +3,7 @@ from shutil import copyfile
 
 # Parámetros de ejemplo para N entornos
 ENVS = [
-    {"name": f"app{i}", "network": f"net{i}"} for i in range(1, 11)
+    {"name": f"app{i}"} for i in range(1, 11)
 ]
 
 MODULE_DIR = "modules/simulated_app"
@@ -19,7 +19,7 @@ def render_and_write(env):
         os.path.join(env_dir, "network.tf.json")
     )
 
-    # 2) Genera main.tf.json solo con recursos
+    # 2) Genera main.tf.json con referencias a variables
     config = {
         "resource": [
             {
@@ -28,15 +28,15 @@ def render_and_write(env):
                         env["name"]: [
                             {
                                 "triggers": {
-                                    "name":    env["name"],
-                                    "network": env["network"]
+                                    "name":    "${var.name}",
+                                    "network": "${var.network}"
                                 },
                                 "provisioner": [
                                     {
                                         "local-exec": {
                                             "command": (
-                                                f"echo 'Arrancando servidor "
-                                                f"{env['name']} en red {env['network']}'"
+                                                "echo 'Arrancando servidor "
+                                                "${var.name} en red ${var.network}'"
                                             )
                                         }
                                     }
