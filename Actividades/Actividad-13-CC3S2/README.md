@@ -72,3 +72,17 @@ terraform apply
 - Se lee la variable de entorno `api_key` y se muestra como información sensible.
 
 ![Terraform Api Key](./capturas/terraform-api-key.png)
+
+## Fase 4: Integración final y discusión
+
+- ¿Cómo extenderías este patrón para 50 módulos y 100 entornos?
+
+Para escalar este patrón a 50 módulos y 100 entornos, se consideraría una estructura de directorios jerárquica y versionamiento de módulos para mejor trazabilidad, así como mantener un archivo de configuración específico para los entornos. Además, se puede implementar un `Makefile` para orquestar la generación y aplicación.
+
+- ¿Qué prácticas de revisión de código aplicarías a los `.tf.json`?
+
+Algunas de las prácticas de revisión de código incluyen el `linting` y formateo con `jq` y `terraform fmt-check`, la validación semántica con `terraform validate`, escaneos de seguridad on `tfsec` o `checkov`, y el uso de `hooks` para automatizar las verificaciones `pre-commit`.
+
+- ¿Cómo gestionarías secretos en producción (sin Vault)?
+
+Se puede implementar una herramienta integrada con el VCS como Github Actions Secrets, o con el proveedor en nube de ser el caso, como AWS Secrets Manager.
