@@ -1,0 +1,67 @@
+repos:
+  # Hook para validar sintaxis JSON con jq
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-json
+        name: Verificar sintaxis JSON
+        description: Valida que todos los archivos .json tengan sintaxis correcta
+        files: \.json$
+
+      - id: pretty-format-json
+        name: Formatear JSON con pretty-format
+        description: Formatea archivos JSON con indentación consistente
+        args: ["--autofix", "--indent=4", "--no-sort-keys"]
+        files: \.json$
+        exclude: ^(\.terraform/|terraform\.tfstate)
+
+      - id: trailing-whitespace
+        name: Eliminar espacios en blanco al final
+        description: Elimina espacios en blanco al final de las líneas
+
+      - id: end-of-file-fixer
+        name: Agregar línea final
+        description: Asegura que los archivos terminen con una línea nueva
+
+      - id: check-yaml
+        name: Verificar sintaxis YAML
+        description: Valida archivos YAML
+        files: \.ya?ml$
+
+  # Hook personalizado para jq --check
+  - repo: local
+    hooks:
+      - id: jq-check
+        name: JQ - Validar JSON
+        description: Ejecuta 'jq --check' en archivos .tf.json
+        entry: bash -c 'for file in "$@"; do jq --check . "$file" > /dev/null || exit 1; done' --
+        language: system
+        files: \.tf\.json$
+        pass_filenames: true
+
+      - id: terraform-validate-json
+        name: Terraform - Validar con schemas
+        description: Valida archivos Terraform JSON contra schemas
+        entry: python3 validate_terraform.py --dir
+        language: system
+        files: (environments|modules)/.*\.tf\.json$
+        pass_filenames: false
+        always_run: false
+
+      - id: terraform-fmt-check
+        name: Terraform - Verificar formato
+        description: Verifica formato de archivos Terraform (solo directorios con .tf.json)
+        entry: bash -c 'if git diff --cached --name-only | grep -q "\.tf\.json$"; then terraform fmt -check -recursive .; fi'
+        language: system
+        pass_filenames: false
+        always_run: false
+
+  # Hook para scripts bash
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
+        name: ShellCheck - Analizar scripts bash
+        description: Analiza scripts bash en busca de errores
+        files: \.(sh|bash)$
+        args: ["--severity=warning"]
