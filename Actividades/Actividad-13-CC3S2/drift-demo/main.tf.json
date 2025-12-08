@@ -1,0 +1,18 @@
+{
+    "module": {
+        "simulated_app": {
+            "source": "../modules/simulated_app",
+            "name": "drift-demo",
+            "network": "demo-net",
+            "port": "8080",
+            "api_key": "${var.api_key}"
+        }
+    },
+    "variable": {
+        "api_key": {
+            "type": "string",
+            "sensitive": true,
+            "description": "API Key sensible"
+        }
+    }
+}
