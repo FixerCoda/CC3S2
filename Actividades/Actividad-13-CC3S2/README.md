@@ -189,3 +189,47 @@ Configuración generada:
    - staging2: network=net2, port=3000
    - staging3: network=net2-peered, port=3000
 ```
+
+**Ayuda:**
+
+```bash
+python generate_envs.py --help
+```
+
+**Características:**
+
+- ✅ Interfaz CLI amigable con `click`
+- ✅ Argumentos configurables con valores por defecto
+- ✅ Generación dinámica de entornos con parámetros personalizados
+- ✅ Validación automática de argumentos
+- ✅ Mensaje de ayuda integrado
+
+## Ejercicio 3: Validación de Esquema JSON
+
+Se implementó un sistema completo de validación de esquemas JSON usando la librería `jsonschema`.
+
+### Estructura de Schemas
+
+Se crearon dos JSON Schemas en el directorio [schemas/](schemas/):
+
+1. **[network_schema.json](schemas/network_schema.json)**: Valida archivos `network.tf.json`
+   - Verifica estructura de variables
+   - Valida tipos de datos (string, number, bool, list, map)
+   - Comprueba campos requeridos (type, description)
+   - Permite campos opcionales (default, sensitive)
+
+2. **[main_schema.json](schemas/main_schema.json)**: Valida archivos `main.tf.json`
+   - Verifica estructura de recursos
+   - Valida configuración de null_resource
+   - Comprueba triggers requeridos (name, network)
+   - Valida provisioners y comandos
+
+### Integración en generate_envs.py
+
+La validación está integrada en el método `validate_json` de [generate_envs.py](generate_envs.py):
+
+**Uso con validación:**
+
+```bash
+python generate_envs.py --count 2 --prefix test --port 5000 --validate
+```
