@@ -1,6 +1,7 @@
 import os
 import json
 import click
+from jsonschema import validate, ValidationError
 
 # Parámetros de ejemplo para N entornos
 def generate_envs(count, prefix):
@@ -19,6 +20,24 @@ def generate_envs(count, prefix):
 
 MODULE_DIR = "modules/simulated_app"
 OUT_DIR    = "environments"
+SCHEMAS_DIR = "schemas"
+
+def load_schema(schema_name):
+    """Carga un JSON Schema desde el directorio schemas/"""
+    schema_path = os.path.join(SCHEMAS_DIR, schema_name)
+    with open(schema_path, 'r') as f:
+        return json.load(f)
+
+def validate_json(data, schema, filename=""):
+    """Valida datos JSON contra un schema"""
+    try:
+        validate(instance=data, schema=schema)
+        click.echo(f"Validación exitosa: {filename}")
+        return True
+    except ValidationError as e:
+        click.echo(f"Error de validación en {filename}:", err=True)
+        click.echo(f"{e.message}", err=True)
+        return False
 
 def generate_network_tf_json(env, port):
     return {
@@ -54,12 +73,21 @@ def generate_network_tf_json(env, port):
         ]
     }
 
-def render_and_write(env, port):
+def render_and_write(env, port, validate_schemas=True):
     env_dir = os.path.join(OUT_DIR, env["name"])
     os.makedirs(env_dir, exist_ok=True)
 
+    if validate_schemas:
+        network_schema = load_schema("network_schema.json")
+        main_schema = load_schema("main_schema.json")
+
     # 1) Genera network.tf.json dinámicamente (con api_key sensitive)
     network_config = generate_network_tf_json(env, port)
+
+    if validate_schemas:
+        if not validate_json(network_config, network_schema, f"{env['name']}/network.tf.json"):
+            raise ValidationError("Validación de Network falló")
+
     with open(os.path.join(env_dir, "network.tf.json"), "w") as fp:
         json.dump(network_config, fp, indent=4)
 
@@ -94,6 +122,10 @@ def render_and_write(env, port):
         ]
     }
 
+    if validate_schemas:
+        if not validate_json(config, main_schema, f"{env['name']}/main.tf.json"):
+            raise ValidationError("Validación de Main falló")
+
     with open(os.path.join(env_dir, "main.tf.json"), "w") as fp:
         json.dump(config, fp, indent=4)
 
@@ -103,7 +135,8 @@ def render_and_write(env, port):
 @click.option('--count', default=3, help='Número de entornos a generar')
 @click.option('--prefix', default='app', help='Prefijo para los nombres de los entornos')
 @click.option('--port', default=8080, help='Puerto a usar en los entornos')
-def main(count, prefix, port):
+@click.option('--validate/--no-validate', default=True, help='Validar JSON contra schemas antes de escribir')
+def main(count, prefix, port, validate):
     """Genera entornos de Terraform con configuración personalizada."""
 
     envs = generate_envs(count, prefix)
@@ -114,9 +147,13 @@ def main(count, prefix, port):
         shutil.rmtree(OUT_DIR)
 
     click.echo("Generando entornos\n")
+    if validate:
+        click.echo("Validación de schemas habilitada\n")
+    else:
+        click.echo("Validación de schemas deshabilitada\n")
 
     for env in envs:
-        render_and_write(env, port)
+        render_and_write(env, port, validate_schemas=validate)
 
     click.echo(f"\nGenerados {len(envs)} entornos en '{OUT_DIR}/'")
     click.echo("\nConfiguración generada:")
