@@ -1,8 +1,8 @@
 # Actividad 13 - Escribiendo infraestructura como código en un entorno local con Terraform
 
 - Nombre: Diego Edson Bayes Santos
-- Fecha: 26/10/2025
-- Tiempo total: 0h
+- Fecha: 08/12/2025
+- Tiempo total: 6h
 - Entorno usado: WSL en laptop personal Windows, en el IDE Visual Studio Code
 
 ## Fase 0: Preparación
@@ -281,3 +281,55 @@ pre-commit run --all-files
 # Ejecutar un hook específico
 pre-commit run jq-check --all-files
 ```
+
+## Ejercicio 5: Compartición Segura de Secretos
+
+### Ubicación del Archivo de Secretos
+
+**Archivo**: `~/.config/secure.json`
+
+Este archivo almacena secretos localmente y nunca debe ser versionado en Git. Debe estar ubicado en el directorio home del usuario.
+
+**Estructura del archivo:**
+
+```json
+{
+  "terraform": {
+    "api_key": "prod-secret-key-abc123xyz789",
+    "aws_access_key": "AKIAIOSFODNN7EXAMPLE",
+    "aws_secret_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  },
+  "metadata": {
+    "created": "2025-01-15",
+    "owner": "diego.bayes@example.com",
+    "expires": "2025-12-31"
+  }
+}
+```
+
+### Workflow de Distribución Segura
+
+Se emplea una herramienta de gestión de secretos como `1Password`, `LastPass` o `Bitwarden`
+
+```text
+1. Administrador crea entrada en bóveda compartida del equipo
+   - Nombre: "Terraform API Key - Proyecto CC3S2"
+   - Contenido: JSON completo para secure.json
+   - Expira: 2025-12-31
+
+2. Desarrollador accede a la bóveda compartida
+   - Copia contenido seguro desde la herramienta
+   - Pega en ~/.config/secure.json local
+
+3. Rotación automática
+   - 1Password genera nuevo secreto cada 90 días
+   - Notifica al equipo vía integración Slack
+```
+
+**Ventajas:**
+
+- Cifrado end-to-end
+- Auditoría de accesos
+- Rotación automática
+- Revocación inmediata
+- Integración con CI/CD
