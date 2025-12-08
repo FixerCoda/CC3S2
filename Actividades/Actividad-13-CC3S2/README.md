@@ -85,4 +85,8 @@ Algunas de las prácticas de revisión de código incluyen el `linting` y format
 
 - ¿Cómo gestionarías secretos en producción (sin Vault)?
 
-Se puede implementar una herramienta integrada con el VCS como Github Actions Secrets, o con el proveedor en nube de ser el caso, como AWS Secrets Manager.
+Se puede implementar una herramienta integrada con el control de versiones, como Github Actions Secrets, o con el proveedor en nube de ser el caso, como AWS Secrets Manager.
+
+- ¿Qué workflows de revisión aplicarías a los JSON generados?
+
+Se pueden incluir `pre-commit hooks` que ejecuten las revisiones previamente descritas en el segundo inciso, de manera automática, antes de cada `commit`. Además, se implementa estas validaciones automáticas y análisis de seguridad dentro del pipeline CI/Cd, de tal forma que no se acepte ningún cambio que no pase los `gates` definidos o qu genere `drift`. Por último, se adjunta el `output` del `terraform plan` en cada PR para mantener un registro adicional.
