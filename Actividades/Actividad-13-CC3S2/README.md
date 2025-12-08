@@ -90,3 +90,69 @@ Se puede implementar una herramienta integrada con el control de versiones, como
 - ¿Qué workflows de revisión aplicarías a los JSON generados?
 
 Se pueden incluir `pre-commit hooks` que ejecuten las revisiones previamente descritas en el segundo inciso, de manera automática, antes de cada `commit`. Además, se implementa estas validaciones automáticas y análisis de seguridad dentro del pipeline CI/Cd, de tal forma que no se acepte ningún cambio que no pase los `gates` definidos o qu genere `drift`. Por último, se adjunta el `output` del `terraform plan` en cada PR para mantener un registro adicional.
+
+## Ejercicio 1: Drift avanzado
+
+Se creó una arquitectura modular con dos servidores y un load balancer:
+
+**Estructura del módulo:**
+
+- [modules/simulated_app/main.tf.json](modules/simulated_app/main.tf.json): Define `server1` y `server2`
+- [modules/simulated_app/load_balancer.tf.json](modules/simulated_app/load_balancer.tf.json): Define el `load_balancer` que depende de ambos servidores
+
+**Entorno de prueba:**
+
+Se creó el directorio [drift-demo/](drift-demo/) que consume el módulo `simulated_app`:
+
+```json
+{
+    "module": {
+        "simulated_app": {
+            "source": "../modules/simulated_app",
+            "name": "drift-demo",
+            "network": "demo-net",
+            "port": "8080"
+        }
+    }
+}
+```
+
+**Simulación de drift:**
+
+Se modificó manualmente el archivo [drift-demo/terraform.tfstate](drift-demo/terraform.tfstate) cambiando el puerto de `server1` de `8080` a `9090` para simular un cambio manual en la infraestructura.
+
+**Detección de drift con terraform plan:**
+
+```bash
+terraform plan
+```
+
+**Resultado:**
+
+```text
+module.simulated_app.null_resource.server1: Refreshing state... [id=8724138018635079543]
+module.simulated_app.null_resource.server2: Refreshing state... [id=5805898956846702577]
+module.simulated_app.null_resource.load_balancer: Refreshing state... [id=803614368377729302]
+
+Terraform will perform the following actions:
+
+  # module.simulated_app.null_resource.load_balancer must be replaced
+-/+ resource "null_resource" "load_balancer" {
+      ~ id       = "803614368377729302" -> (known after apply)
+      ~ triggers = { # forces replacement
+          ~ "backend_servers" = "8724138018635079543,5805898956846702577" -> (known after apply)
+            # (1 unchanged element hidden)
+        }
+    }
+
+  # module.simulated_app.null_resource.server1 must be replaced
+-/+ resource "null_resource" "server1" {
+      ~ id       = "8724138018635079543" -> (known after apply)
+      ~ triggers = { # forces replacement
+          ~ "port"    = "9090" -> "8080"
+            # (2 unchanged elements hidden)
+        }
+    }
+
+Plan: 2 to add, 0 to change, 2 to destroy.
+```
