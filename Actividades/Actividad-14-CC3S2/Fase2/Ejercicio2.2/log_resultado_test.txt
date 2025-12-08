@@ -1,0 +1,41 @@
+fixercoda@RUBICK:~/patrones-modulos-infraestructura$ python3 test_factory.py
+
+Recurso con formato '%Y%m%d'
+{
+  "resource": [
+    {
+      "null_resource": [
+        {
+          "app_server": [
+            {
+              "triggers": {
+                "factory_uuid": "d5b776c2-a2f8-422a-bac3-a1fff7cac802",
+                "formatted_timestamp": "20251208"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Recurso con formato '%Y-%m-%d'
+{
+  "resource": [
+    {
+      "null_resource": [
+        {
+          "database": [
+            {
+              "triggers": {
+                "factory_uuid": "ae8c9104-14a7-4cdc-aa85-4b37e56b7422",
+                "formatted_timestamp": "2025-12-08"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
