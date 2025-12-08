@@ -1,0 +1,8 @@
+# Número de entornos a generar
+ENV_COUNT=3
+
+# Prefijo para nombres de entornos
+ENV_PREFIX="app"
+
+# Puerto por defecto
+ENV_PORT=8080
