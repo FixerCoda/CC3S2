@@ -156,3 +156,36 @@ Terraform will perform the following actions:
 
 Plan: 2 to add, 0 to change, 2 to destroy.
 ```
+
+## Ejercicio 2: CLI Interactiva
+
+Se refactorizó el script [generate_envs.py](generate_envs.py) para usar la librería `click` y aceptar argumentos de línea de comandos.
+
+**Argumentos disponibles:**
+
+- `--count`: Número de entornos a generar (default: 3)
+- `--prefix`: Prefijo para los nombres de los entornos (default: 'app')
+- `--port`: Puerto a usar en los entornos (default: 8080)
+
+**Uso:**
+
+```bash
+python generate_envs.py --count 3 --prefix staging --port 3000
+```
+
+**Salida:**
+
+```text
+Generando entornos
+
+✓ Generado: environments/staging1/ (network=net1)
+✓ Generado: environments/staging2/ (network=net2)
+✓ Generado: environments/staging3/ (network=net2-peered)
+
+Generados 3 entornos en 'environments/'
+
+Configuración generada:
+   - staging1: network=net1, port=3000
+   - staging2: network=net2, port=3000
+   - staging3: network=net2-peered, port=3000
+```
