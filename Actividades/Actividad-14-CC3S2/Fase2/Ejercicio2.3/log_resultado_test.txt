@@ -1,0 +1,2 @@
+fixercoda@RUBICK:~/patrones-modulos-infraestructura$ python3 test_prototype.py
+[Builder] Terraform JSON escrito en: ./main.tf.json

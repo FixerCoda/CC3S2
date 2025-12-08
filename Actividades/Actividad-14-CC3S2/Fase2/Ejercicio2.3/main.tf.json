@@ -1,0 +1,25 @@
+{
+    "resource": [
+        {
+            "null_resource": [
+                {
+                    "app_0": [
+                        {
+                            "triggers": {
+                                "factory_uuid": "103c27c0-7179-4036-bd5f-c1a8fb6ff253",
+                                "timestamp": "2025-12-08T20:04:49.277176",
+                                "welcome": "\u00a1Hola!"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "local_file": {
+                "welcome_txt": {
+                    "content": "Bienvenido",
+                    "filename": "${path.module}/bienvenida.txt"
+                }
+            }
+        }
+    ]
+}
