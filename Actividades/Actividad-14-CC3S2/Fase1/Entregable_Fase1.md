@@ -7,3 +7,9 @@ Para garantiza una sola instancia, la clase `SingletonMeta` sobrescribe el méto
 ## Factory
 
 La clase `NullResourceFactory` encapsula toda la lógica de creación de recursos `null_resource` de Terraform mediante el método `create()`. De esta manera, se oculta la estructura JSON específica de Terraform que el usuario no necesita conocer. Los `triggers` en `null_resource` de Terraform controlan cuándo el recurso debe recrearse gracias al `UUID` único, el cual garantiza la identidad e idempotencia de cada recurso, y al `timestamp` para registrar la creación del recurso. Esto es útil para tareas como reiniciar servicios o ejecutar scripts de configuración.
+
+## Prototype
+
+![Diagrama UML](./Diagrama_UML_Patrones.png)
+
+El mutator es una función ingresada como argumento que recibe el diccionario clonado y se aplica a sí misma para modificarlo. Si no se proporciona, se usa un `lambda` de identidad para no modificar el clon. Esto permite personalizar cada instancia cambiando nombres, tags, parámetros específicos del clon sin afectar el original. Además, un mismo prototipo puede generar múltiples clones con diferentes mutadores.
