@@ -233,3 +233,51 @@ La validación está integrada en el método `validate_json` de [generate_envs.p
 ```bash
 python generate_envs.py --count 2 --prefix test --port 5000 --validate
 ```
+
+## Ejercicio 4: GitOps Local
+
+Se implementó un sistema GitOps local que detecta cambios en los módulos y regenera automáticamente los entornos.
+
+### Script de Regeneración Automática
+
+Se creó [scripts/gitops_regenerate.sh](scripts/gitops_regenerate.sh), un script bash que:
+
+- **Detecta cambios**: Calcula un hash SHA256 de todos los archivos en `modules/simulated_app/`
+- **Compara estados**: Compara el hash actual con el anterior guardado en `.gitops_last_hash`
+- **Regenera automáticamente**: Si detecta cambios, regenera todos los entornos
+- **Actualiza hash**: Guarda el nuevo hash para futuras comparaciones
+
+**Uso básico:**
+
+```bash
+# Detectar cambios y regenerar si es necesario
+source ./scripts/gitops_regenerate.sh
+
+# Forzar regeneración sin verificar cambios
+source ./scripts/gitops_regenerate.sh --force
+```
+
+### Hooks de Pre-commit
+
+Se creó [.pre-commit-config.yaml](.pre-commit-config.yaml) con múltiples hooks de validación:
+
+**Hooks incluidos:**
+
+1. **check-json**: Valida sintaxis JSON básica
+2. **pretty-format-json**: Formatea JSON con indentación consistente (4 espacios)
+3. **jq-check**: Ejecuta `jq --check` en archivos `.tf.json`
+4. **terraform-validate-json**: Valida contra schemas personalizados
+5. **terraform-fmt-check**: Verifica formato Terraform
+6. **shellcheck**: Analiza scripts bash
+7. **trailing-whitespace**: Elimina espacios al final de líneas
+8. **end-of-file-fixer**: Asegura línea final en archivos
+
+**Ejecutar manualmente:**
+
+```bash
+# Ejecutar todos los hooks en todos los archivos
+pre-commit run --all-files
+
+# Ejecutar un hook específico
+pre-commit run jq-check --all-files
+```
