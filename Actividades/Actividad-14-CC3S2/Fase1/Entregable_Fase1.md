@@ -17,3 +17,7 @@ El mutator es una función ingresada como argumento que recibe el diccionario cl
 ## Composite
 
 El proceso de agrupamiento se logra al mantener una lista de módulos `_children` que almacena diccionarios de recursos individuales. Cada hijo es un diccionario independiente con su propia estructura Terraform. Se agregan mediante el método `add()` y se consolida todos los bloques en un único JSON válido en `export()`.
+
+## Builder
+
+`InfrastructureBuilder` orquesta tres patrones para construir configuraciones Terraform. Primero, usa `Factory` para crear recursos base con `NullResourceFactory.create()`. Luego los envuelve en `Prototype` para clonarlos múltiples veces aplicando `mutators` que personalizan cada instancia (cambiando nombres y triggers). Después, agrega todos los clones al `Composite` (`CompositeModule`), el cual los consolida en una estructura unificada. Finalmente exporta todo mediante `export()` que llama a `_module.export()` para obtener un único diccionario con todos los recursos bajo la clave `"resource"` y lo serializa a un archivo `.tf.json` válido para Terraform usando `json.dump()`.
