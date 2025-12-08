@@ -1,14 +1,15 @@
 import os
 import json
+import click
 
 # Parámetros de ejemplo para N entornos
-def generate_envs():
+def generate_envs(count, prefix):
     """Genera configuración de entornos con dependencias."""
     envs = []
-    for i in range(1, 4):
-        env = {"name": f"app{i}"}
+    for i in range(1, count + 1):
+        env = {"name": f"{prefix}{i}"}
 
-        if i == 3:
+        if i == count:
             env["network"] = "net2-peered"
         else:
             env["network"] = f"net{i}"
@@ -16,11 +17,10 @@ def generate_envs():
         envs.append(env)
     return envs
 
-ENVS = generate_envs()
 MODULE_DIR = "modules/simulated_app"
 OUT_DIR    = "environments"
 
-def generate_network_tf_json(env):
+def generate_network_tf_json(env, port):
     return {
         "variable": [
             {
@@ -40,7 +40,7 @@ def generate_network_tf_json(env):
             {
                 "port": [{
                     "type": "string",
-                    "default": "8080",
+                    "default": str(port),
                     "description": "Puerto del servidor"
                 }]
             },
@@ -54,12 +54,12 @@ def generate_network_tf_json(env):
         ]
     }
 
-def render_and_write(env):
+def render_and_write(env, port):
     env_dir = os.path.join(OUT_DIR, env["name"])
     os.makedirs(env_dir, exist_ok=True)
 
     # 1) Genera network.tf.json dinámicamente (con api_key sensitive)
-    network_config = generate_network_tf_json(env)
+    network_config = generate_network_tf_json(env, port)
     with open(os.path.join(env_dir, "network.tf.json"), "w") as fp:
         json.dump(network_config, fp, indent=4)
 
@@ -99,20 +99,29 @@ def render_and_write(env):
 
     print(f"✓ Generado: {env_dir}/ (network={env['network']})")
 
-if __name__ == "__main__":
+@click.command()
+@click.option('--count', default=3, help='Número de entornos a generar')
+@click.option('--prefix', default='app', help='Prefijo para los nombres de los entornos')
+@click.option('--port', default=8080, help='Puerto a usar en los entornos')
+def main(count, prefix, port):
+    """Genera entornos de Terraform con configuración personalizada."""
+
+    envs = generate_envs(count, prefix)
+
     # Limpia entornos viejos (si quieres)
     if os.path.isdir(OUT_DIR):
         import shutil
         shutil.rmtree(OUT_DIR)
 
-    print("=== Generando entornos ===\n")
+    click.echo("Generando entornos\n")
 
-    for env in ENVS:
-        render_and_write(env)
+    for env in envs:
+        render_and_write(env, port)
 
-    print(f"\n✅ Generados {len(ENVS)} entornos en '{OUT_DIR}/'")
-    print("\n📝 Nota: api_key es SENSITIVE y NO se escribe en disco.")
-    print("   Para usarla, exporta: export TF_VAR_api_key='your-secret-key'")
-    print("\n📋 Configuración generada:")
-    for env in ENVS:
-        print(f"   - {env['name']}: network={env['network']}")
+    click.echo(f"\nGenerados {len(envs)} entornos en '{OUT_DIR}/'")
+    click.echo("\nConfiguración generada:")
+    for env in envs:
+        click.echo(f"   - {env['name']}: network={env['network']}, port={port}")
+
+if __name__ == "__main__":
+    main()
