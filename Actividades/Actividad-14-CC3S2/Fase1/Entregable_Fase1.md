@@ -13,3 +13,7 @@ La clase `NullResourceFactory` encapsula toda la lógica de creación de recurso
 ![Diagrama UML](./Diagrama_UML_Patrones.png)
 
 El mutator es una función ingresada como argumento que recibe el diccionario clonado y se aplica a sí misma para modificarlo. Si no se proporciona, se usa un `lambda` de identidad para no modificar el clon. Esto permite personalizar cada instancia cambiando nombres, tags, parámetros específicos del clon sin afectar el original. Además, un mismo prototipo puede generar múltiples clones con diferentes mutadores.
+
+## Composite
+
+El proceso de agrupamiento se logra al mantener una lista de módulos `_children` que almacena diccionarios de recursos individuales. Cada hijo es un diccionario independiente con su propia estructura Terraform. Se agregan mediante el método `add()` y se consolida todos los bloques en un único JSON válido en `export()`.
