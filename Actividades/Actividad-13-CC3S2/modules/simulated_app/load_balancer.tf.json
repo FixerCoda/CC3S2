@@ -1,0 +1,29 @@
+{
+    "resource": [
+        {
+            "null_resource": [
+                {
+                    "load_balancer": [
+                        {
+                            "triggers": {
+                                "backend_servers": "${null_resource.server1.id},${null_resource.server2.id}",
+                                "lb_name": "${var.name}-lb"
+                            },
+                            "depends_on": [
+                                "null_resource.server1",
+                                "null_resource.server2"
+                            ],
+                            "provisioner": [
+                                {
+                                    "local-exec": {
+                                        "command": "echo 'Load Balancer ${var.name}-lb configurado con backends: server1, server2'"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -3,16 +3,33 @@
         {
             "null_resource": [
                 {
-                    "local-server": [
+                    "server1": [
                         {
                             "triggers": {
-                                "name": "${var.name}",
-                                "network": "${var.network}"
+                                "name": "${var.name}-server1",
+                                "network": "${var.network}",
+                                "port": "${var.port}"
                             },
                             "provisioner": [
                                 {
                                     "local-exec": {
-                                        "command": "echo 'Arrancando servidor ${var.name} en red ${var.network}'"
+                                        "command": "echo 'Arrancando servidor ${var.name}-server1 en red ${var.network}:${var.port}'"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "server2": [
+                        {
+                            "triggers": {
+                                "name": "${var.name}-server2",
+                                "network": "${var.network}",
+                                "port": "${var.port}"
+                            },
+                            "provisioner": [
+                                {
+                                    "local-exec": {
+                                        "command": "echo 'Arrancando servidor ${var.name}-server2 en red ${var.network}:${var.port}'"
                                     }
                                 }
                             ]
